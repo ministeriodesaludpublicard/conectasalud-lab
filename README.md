@@ -198,7 +198,3 @@ git branch -M main
 git remote add origin <URL_DEL_REPOSITORIO>
 git push -u origin main
 ```
-
-## Alcance excluido en esta etapa
-
-La interfaz no expone generación desde SQL Server, PDQm, ICVP, QR/VHL, interconsulta, ITI-66 ni transacciones distintas de ITI-65/67/68. La creación de recursos base y documentos guiados existe para preparar esos tres intercambios del [Perfil MHD de IHE](https://profiles.ihe.net/ITI/MHD/index.html).
