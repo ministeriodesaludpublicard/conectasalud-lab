@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ConectaSalud Lab · Conectatón Nacional</title>
+  <meta name="description" content="Laboratorio didáctico de intercambio documental FHIR para la Conectatón Nacional de Interoperabilidad en Salud." />
+  <meta name="theme-color" content="#102a4f" />
+  <link rel="icon" type="image/png" href="/assets/conectasalud-lab-favicon.png" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Navegación principal">
+      <div class="brand">
+        <span class="brand-symbol"><img src="/assets/conectasalud-lab-logo.png" alt="" /></span>
+        <div><strong>ConectaSalud Lab</strong><small>Conectatón Nacional 2026</small></div>
+      </div>
+
+      <nav class="nav-list">
+        <button class="nav-link active" data-page-target="home"><span>⌂</span><span>Inicio</span></button>
+        <button class="nav-link" data-page-target="resources"><span>◇</span><span>Recursos base</span></button>
+        <button class="nav-link" data-page-target="guided"><span>＋</span><span>Casos guiados</span></button>
+        <button class="nav-link" data-page-target="editor"><span>{ }</span><span>Editor y validador</span></button>
+        <button class="nav-link" data-page-target="iti65"><span>↑</span><span>Publicar · ITI-65</span></button>
+        <button class="nav-link" data-page-target="queries"><span>⌕</span><span>Consultar · ITI-67/68</span></button>
+        <button class="nav-link" data-page-target="servers"><span>⚙</span><span>Servidores FHIR</span></button>
+        <button class="nav-link" data-page-target="activity"><span>≡</span><span>Actividad técnica</span></button>
+      </nav>
+
+      <div class="scope-card">
+        <small>ALCANCE ACTUAL</small>
+        <div><span>ITI-65</span><span>ITI-67</span><span>ITI-68</span></div>
+        <p>FHIR R4 · <a href="https://profiles.ihe.net/ITI/MHD/index.html" target="_blank" rel="noreferrer">Perfil MHD de IHE ↗</a> · Guía FHIR DO</p>
+      </div>
+    </aside>
+
+    <div class="page-shell">
+      <header class="topbar">
+        <button id="menuButton" class="icon-button mobile-only" aria-label="Abrir menú">☰</button>
+        <div>
+          <p class="eyebrow">Laboratorio didáctico de interoperabilidad</p>
+          <h1 id="pageTitle">Inicio</h1>
+          <p id="pageDescription">Practica los tres casos de uso mediante el Perfil MHD de IHE.</p>
+        </div>
+        <div class="connection-box">
+          <span id="connectionDot" class="connection-dot"></span>
+          <div class="server-switcher"><label for="serverSelect">Servidor FHIR activo</label><select id="serverSelect" aria-label="Servidor FHIR activo"><option>Cargando…</option></select></div>
+          <button id="testServerButton" class="button secondary compact">Probar</button>
+          <button id="openServersButton" class="button ghost compact" data-page-target="servers">Configurar</button>
+        </div>
+      </header>
+
+      <main>
+        <section class="page active" data-page="home">
+          <article class="hero-card">
+            <div>
+              <span class="kicker">Conectatón Nacional de Interoperabilidad en Salud</span>
+              <h2>Crea, valida e intercambia documentos clínicos</h2>
+              <p>El laboratorio sigue la Guía FHIR DO: administra recursos en el sandbox activo, guía la autoría de los tres casos nacionales y ejecuta ITI-65, ITI-67 e ITI-68 del <a href="https://profiles.ihe.net/ITI/MHD/index.html" target="_blank" rel="noreferrer">Perfil MHD de IHE ↗</a>.</p>
+              <div class="button-row">
+                <button class="button primary" data-page-target="guided">Crear caso guiado</button>
+                <button class="button ghost" data-page-target="editor">Abrir editor FHIR</button>
+                <a class="button ghost" href="https://igrepdom.netlify.app/" target="_blank" rel="noreferrer">Consultar guía oficial ↗</a>
+              </div>
+            </div>
+            <div class="flow-card" aria-label="Secuencia del Perfil MHD de IHE">
+              <div><span>65</span><strong>Publicar</strong><small>Provide Document Bundle</small></div>
+              <i>→</i>
+              <div><span>67</span><strong>Buscar índices</strong><small>Find Document References</small></div>
+              <i>→</i>
+              <div><span>68</span><strong>Recuperar</strong><small>Retrieve Document</small></div>
+            </div>
+          </article>
+
+          <div class="section-heading">
+            <div><span class="kicker">Tres casos de uso</span><h2>Perfiles priorizados por la guía nacional</h2></div>
+          </div>
+          <div class="use-case-grid">
+            <article class="use-case-card blue">
+              <span class="track">TRACK 1</span><div class="case-icon">NPS</div>
+              <h3>Resumen de Paciente</h3>
+              <p>Intercambio de antecedentes, medicación actual y alergias mediante un documento clínico estructurado.</p>
+              <code>BundleNPSDO</code>
+              <a href="https://igrepdom.netlify.app/resumenpaciente" target="_blank" rel="noreferrer">Ver perfiles ↗</a>
+            </article>
+            <article class="use-case-card teal">
+              <span class="track">TRACK 2</span><div class="case-icon">VE</div>
+              <h3>Evento epidemiológico</h3>
+              <p>Notificación individual de casos y transmisión del documento asociado hacia vigilancia nacional.</p>
+              <code>BundleNotifDO</code>
+              <a href="https://igrepdom.netlify.app/notificacionepidemiologica" target="_blank" rel="noreferrer">Ver perfiles ↗</a>
+            </article>
+            <article class="use-case-card amber">
+              <span class="track">TRACK 3</span><div class="case-icon">RENAC</div>
+              <h3>Registro Nacional de Cáncer</h3>
+              <p>Publicación y recuperación del resumen oncológico requerido para el registro nacional.</p>
+              <code>BundleOncoDO</code>
+              <a href="https://igrepdom.netlify.app/resumenoncologico" target="_blank" rel="noreferrer">Ver perfiles ↗</a>
+            </article>
+          </div>
+
+          <div class="notice info"><strong>Regla didáctica:</strong> el editor interpreta cualquier recurso FHIR R4, pero ITI-65 solo acepta un Bundle documental de uno de estos tres casos o una transacción <code>BundleTransaccDO</code> ya construida.</div>
+        </section>
+
+        <section class="page" data-page="resources" hidden>
+          <div class="section-heading">
+            <div><span class="kicker">Datos maestros FHIR</span><h2>Recursos base del servidor activo</h2><p>Crea y consulta los pacientes, profesionales y organizaciones que utilizarán los tres casos de uso.</p></div>
+            <div class="button-row"><button id="refreshResourcesButton" class="button secondary">Actualizar listado</button></div>
+          </div>
+          <div class="resource-admin-tabs" role="tablist">
+            <button class="resource-tab active" data-resource-type="Organization">Organizaciones <span class="resource-count" data-resource-count="Organization">0</span></button>
+            <button class="resource-tab" data-resource-type="Patient">Pacientes <span class="resource-count" data-resource-count="Patient">0</span></button>
+            <button class="resource-tab" data-resource-type="Practitioner">Profesionales <span class="resource-count" data-resource-count="Practitioner">0</span></button>
+            <button class="resource-tab" data-resource-type="PractitionerRole">Roles profesionales <span class="resource-count" data-resource-count="PractitionerRole">0</span></button>
+          </div>
+          <div class="server-layout">
+            <article class="card">
+              <div class="card-heading plain"><div><h3 id="resourceListTitle">Organizaciones</h3><p id="resourceListMeta">Servidor activo</p></div></div>
+              <div id="managedResourceList" class="managed-resource-list empty-state compact-empty">Actualiza el listado para consultar recursos.</div>
+            </article>
+            <article class="card">
+              <h3 id="resourceFormTitle">Nueva organización</h3>
+              <form id="managedResourceForm">
+                <div id="managedResourceFields" class="form-grid"></div>
+                <div class="button-row"><button class="button primary" type="submit">Crear en el servidor FHIR</button></div>
+              </form>
+              <div class="notice info"><strong>Persistencia real:</strong> estos registros se crean mediante <code>POST /{resourceType}</code> en el sandbox seleccionado; no se guardan en un catálogo local de ConectaSalud Lab.</div>
+            </article>
+          </div>
+        </section>
+
+        <section class="page" data-page="guided" hidden>
+          <div class="section-heading">
+            <div><span class="kicker">Autoría clínica guiada</span><h2>Generar documento para un caso de uso</h2><p>Busca al paciente por datos demográficos, selecciona autor y custodio, registra la información clínica y genera el Bundle JSON.</p></div>
+            <button id="refreshGuidedContextButton" class="button secondary">Cargar autores y organizaciones</button>
+          </div>
+          <article class="card guided-card">
+            <form id="guidedCaseForm">
+              <div class="form-grid three-columns">
+                <label>Caso de uso
+                  <select id="guidedUseCase"><option value="nps">Continuidad asistencial · NPS/IPS</option><option value="notif">Evento epidemiológico</option><option value="onco">Registro Nacional de Cáncer</option></select>
+                </label>
+                <label>Origen del paciente<select id="guidedPatientMode"><option value="existing">Paciente existente</option><option value="new">Crear dentro de ITI-65</option></select></label>
+                <label>Profesional autor<select id="guidedPractitioner"><option value="">Cargar recursos…</option></select></label>
+                <label>Organización custodia<select id="guidedOrganization"><option value="">Cargar recursos…</option></select></label>
+                <label>Fecha de la atención<input id="guidedDate" type="datetime-local" /></label>
+                <label>Motivo o contexto<input id="guidedReason" type="text" maxlength="500" placeholder="Motivo de consulta o de notificación" /></label>
+              </div>
+
+              <div id="guidedExistingPatientField" class="guided-case-fields patient-identity-search">
+                <div class="patient-search-heading">
+                  <div><h3>Búsqueda de paciente tipo MPI</h3><p class="field-help">Consulta recursos <code>Patient</code> en el servidor activo mediante identificador o datos demográficos. No carga el catálogo completo.</p></div>
+                  <a href="https://profiles.ihe.net/ITI/PDQm/index.html" target="_blank" rel="noreferrer">Referencia: perfil PDQm de IHE ↗</a>
+                </div>
+                <div class="form-grid three-columns">
+                  <label>Número de identificación<input id="guidedPatientIdentifier" type="text" placeholder="00100000001" /></label>
+                  <label>Sistema del identificador <span class="optional">opcional</span><input id="guidedPatientIdentifierSystem" type="url" placeholder="https://…/sid/cedula" /></label>
+                  <label>Nombres<input id="guidedPatientGiven" type="text" placeholder="María Elena" /></label>
+                  <label>Apellidos<input id="guidedPatientFamily" type="text" placeholder="Pérez" /></label>
+                  <label>Fecha de nacimiento<input id="guidedPatientBirthDate" type="date" /></label>
+                  <label>Sexo administrativo <span class="optional">opcional</span><select id="guidedPatientGender"><option value="">Cualquiera</option><option value="female">Femenino</option><option value="male">Masculino</option><option value="other">Otro</option><option value="unknown">Desconocido</option></select></label>
+                </div>
+                <div class="button-row"><button id="searchGuidedPatientButton" class="button secondary" type="button">Buscar paciente</button><span id="guidedPatientSearchMeta" class="field-help">Indica un identificador o al menos un nombre o apellido.</span></div>
+                <input id="guidedPatient" type="hidden" />
+                <div id="guidedSelectedPatient" class="selected-patient empty-state compact-empty">Ningún paciente seleccionado.</div>
+                <div id="guidedPatientResults" class="patient-search-results"></div>
+              </div>
+
+              <div id="guidedNewPatientFields" class="guided-case-fields" hidden>
+                <h3>Paciente nuevo para la transacción</h3>
+                <p class="field-help">El PatientDO se incluirá en el Bundle y se creará mediante <code>POST Patient</code> al ejecutar ITI-65.</p>
+                <div class="form-grid three-columns">
+                  <label>Nombres<input id="newPatientGiven" type="text" /></label>
+                  <label>Primer apellido<input id="newPatientFamily" type="text" /></label>
+                  <label>Segundo apellido<input id="newPatientSecondFamily" type="text" /></label>
+                  <label>Número de identificación<input id="newPatientIdentifierValue" type="text" /></label>
+                  <label>Tipo de identificación<input id="newPatientIdentifierType" type="text" value="CED" /></label>
+                  <label>Sistema del identificador<input id="newPatientIdentifierSystem" type="url" value="https://digital.msp.gob.do/fhir/sid/cedula" /></label>
+                  <label>Sexo administrativo<select id="newPatientGender"><option value="female">Femenino</option><option value="male">Masculino</option><option value="other">Otro</option><option value="unknown">Desconocido</option></select></label>
+                  <label>Fecha de nacimiento<input id="newPatientBirthDate" type="date" /></label>
+                  <label>Teléfono<input id="newPatientPhone" type="tel" /></label>
+                  <label>Correo electrónico<input id="newPatientEmail" type="email" /></label>
+                </div>
+              </div>
+
+              <div id="guidedNpsFields" class="guided-case-fields">
+                <h3>Información del NPS/IPS</h3>
+                <div class="form-grid three-columns">
+                  <label>Diagnóstico · código ICD-10<input id="npsDiagnosisCode" type="text" placeholder="I10" /></label>
+                  <label>Diagnóstico · descripción<input id="npsDiagnosisDisplay" type="text" placeholder="Hipertensión esencial" /></label>
+                  <label>Detalle clínico<input id="npsDiagnosisDetail" type="text" placeholder="Estado actual" /></label>
+                  <label>Alergia · código SNOMED CT<input id="npsAllergyCode" type="text" /></label>
+                  <label>Alergia · descripción<input id="npsAllergyDisplay" type="text" placeholder="Alergia a penicilina" /></label>
+                  <label>Reacción o detalle<input id="npsAllergyDetail" type="text" /></label>
+                  <label>Medicamento · código<input id="npsMedicationCode" type="text" /></label>
+                  <label>Medicamento · descripción<input id="npsMedicationDisplay" type="text" /></label>
+                  <label>Dosis e indicaciones<input id="npsMedicationDetail" type="text" /></label>
+                </div>
+              </div>
+
+              <div id="guidedNotifFields" class="guided-case-fields" hidden>
+                <h3>Información epidemiológica</h3>
+                <div class="form-grid three-columns">
+                  <label>Enfermedad · código ICD-10<input id="notifDiagnosisCode" type="text" /></label>
+                  <label>Enfermedad · descripción<input id="notifDiagnosisDisplay" type="text" /></label>
+                  <label>Detalle de la enfermedad<input id="notifDiagnosisDetail" type="text" /></label>
+                </div>
+                <label>Signos y síntomas<textarea id="notifSymptoms" rows="3" placeholder="Describe los signos y síntomas observados"></textarea></label>
+              </div>
+
+              <div id="guidedOncoFields" class="guided-case-fields" hidden>
+                <h3>Información oncológica</h3>
+                <div class="form-grid three-columns">
+                  <label>Diagnóstico · código ICD-10<input id="oncoDiagnosisCode" type="text" /></label>
+                  <label>Diagnóstico · descripción<input id="oncoDiagnosisDisplay" type="text" /></label>
+                  <label>Etapa clínica<input id="oncoStage" type="text" placeholder="Ej. IIIB" /></label>
+                  <label>Sitio primario del tumor<input id="oncoTumorSite" type="text" /></label>
+                  <label class="span-two">Resumen de tratamiento<input id="oncoTreatment" type="text" /></label>
+                </div>
+              </div>
+
+              <div id="guidedPdfField" class="guided-case-fields" hidden>
+                <h3>Documento clínico PDF</h3>
+                <label>Archivo PDF requerido para vigilancia y RENAC<input id="guidedPdfInput" type="file" accept="application/pdf,.pdf" /></label>
+                <div class="guided-pdf-meta-row">
+                  <p id="guidedPdfMeta" class="field-help">No se ha seleccionado un archivo.</p>
+                  <button id="previewGuidedPdfButton" class="button ghost compact" type="button" hidden>Visualizar PDF</button>
+                </div>
+              </div>
+
+              <div class="button-row"><button id="generateGuidedButton" class="button primary" type="submit">Generar JSON del caso</button></div>
+            </form>
+          </article>
+        </section>
+
+        <section class="page" data-page="editor" hidden>
+          <div class="section-heading editor-heading">
+            <div>
+              <span class="kicker">FHIR Workbench</span>
+              <h2>Editor, intérprete y validador</h2>
+              <p>Carga un archivo o pega cualquier recurso FHIR JSON. La interpretación aparece en la misma pantalla.</p>
+            </div>
+            <div class="button-row">
+              <label class="button ghost file-button">Cargar archivo<input id="jsonFileInput" type="file" accept="application/json,.json" /></label>
+              <button id="formatButton" class="button secondary">Formatear</button>
+              <button id="clearEditorButton" class="button ghost">Limpiar</button>
+            </div>
+          </div>
+
+          <div class="url-loader">
+            <label for="resourceUrlInput"><strong>Cargar desde una URL FHIR</strong><small>Pega la URL directa de un recurso y ConectaSalud Lab recuperará su representación JSON.</small></label>
+            <div class="url-loader-controls">
+              <input id="resourceUrlInput" type="url" inputmode="url" placeholder="https://servidor-fhir.example/fhir/Patient/123" />
+              <button id="loadUrlButton" class="button secondary">Obtener recurso</button>
+            </div>
+            <small class="field-help">Si la URL requiere autenticación, se utilizará el Bearer token configurado en ITI-65. Por seguridad, los hosts privados deben autorizarse en la configuración.</small>
+          </div>
+
+          <div class="workbench-grid">
+            <article class="workbench-pane editor-pane">
+              <div class="pane-heading">
+                <div><span class="step-number">1</span><div><strong>JSON FHIR</strong><small id="editorMeta">Pega o carga un recurso</small></div></div>
+                <span id="syntaxBadge" class="badge neutral">Sin contenido</span>
+              </div>
+              <textarea id="jsonEditor" class="json-editor" spellcheck="false" aria-label="Editor JSON FHIR" placeholder='{
+  "resourceType": "Patient",
+  "meta": {
+    "profile": [
+      "https://digital.msp.gob.do/fhir/conectaton/StructureDefinition/PatientDO"
+    ]
+  }
+}'></textarea>
+              <div id="syntaxMessage" class="inline-message"></div>
+            </article>
+
+            <article class="workbench-pane preview-pane">
+              <div class="pane-heading">
+                <div><span class="step-number">2</span><div><strong>Interpretación</strong><small>Vista legible del recurso</small></div></div>
+                <button id="downloadButton" class="button ghost compact" disabled>Descargar</button>
+              </div>
+              <div id="resourcePreview" class="resource-preview empty-state">
+                <div class="empty-icon">{ }</div><h3>Esperando un recurso FHIR</h3><p>El resultado se mostrará aquí sin cambiar de pantalla.</p>
+              </div>
+            </article>
+          </div>
+
+          <article class="validation-panel">
+            <div class="validation-heading">
+              <div><span class="step-number">3</span><div><strong>Validación contra el servidor</strong><small>POST /{resourceType}/$validate · OperationOutcome</small></div></div>
+              <div class="button-row">
+                <button id="validateButton" class="button primary" disabled>Validar $validate</button>
+                <button class="button secondary" data-page-target="iti65">Continuar a ITI-65</button>
+              </div>
+            </div>
+            <div id="validationResult" class="validation-content empty-state compact-empty">Ejecuta <strong>$validate</strong> para comprobar FHIR R4, perfiles, terminología y referencias.</div>
+          </article>
+        </section>
+
+        <section class="page" data-page="iti65" hidden>
+          <div class="section-heading">
+            <div><span class="kicker"><a href="https://profiles.ihe.net/ITI/MHD/index.html" target="_blank" rel="noreferrer">Perfil MHD de IHE ↗</a> · Provide Document Bundle</span><h2>ITI-65 · Publicar documento</h2><p>Utiliza el recurso activo del editor. Los Bundles documentales se envuelven automáticamente en <code>BundleTransaccDO</code>.</p></div>
+          </div>
+          <div class="transaction-layout">
+            <article class="card">
+              <h3>Documento preparado</h3>
+              <div id="iti65ResourceSummary" class="resource-selection empty-state compact-empty">Todavía no hay un recurso válido en el editor.</div>
+              <label>Identificador de la fuente del <a href="https://profiles.ihe.net/ITI/MHD/index.html" target="_blank" rel="noreferrer">Perfil MHD de IHE ↗</a>
+                <input id="sourceIdInput" type="text" placeholder="urn:oid:…" />
+              </label>
+              <label>Bearer token <span class="optional">opcional</span>
+                <input id="tokenInput" type="password" autocomplete="off" placeholder="Solo si el nodo requiere autenticación" />
+              </label>
+              <div class="notice warning"><strong>Antes de publicar:</strong> valida el documento. ITI-65 no sustituye la validación de los perfiles de la guía nacional.</div>
+              <div class="button-row">
+                <button id="iti65ValidateButton" class="button secondary" disabled>Validar primero</button>
+                <button id="iti65SendButton" class="button primary" disabled>Ejecutar ITI-65</button>
+              </div>
+            </article>
+            <article class="card response-card">
+              <h3>Resultado de la transacción</h3>
+              <div id="iti65Result" class="empty-state">La respuesta del servidor y los recursos creados aparecerán aquí.</div>
+            </article>
+          </div>
+        </section>
+
+        <section class="page" data-page="queries" hidden>
+          <div class="section-heading">
+            <div><span class="kicker"><a href="https://profiles.ihe.net/ITI/MHD/index.html" target="_blank" rel="noreferrer">Perfil MHD de IHE ↗</a> · Consulta y recuperación</span><h2>ITI-67 · ITI-68</h2><p>Localiza las referencias documentales de un paciente y recupera el Bundle seleccionado.</p></div>
+          </div>
+          <article class="query-console card">
+            <div class="query-inputs">
+              <label>Identificador del paciente
+                <input id="patientIdentifierInput" type="text" placeholder="Ej.: sistema|valor o valor" />
+              </label>
+              <div class="button-row bottom-aligned">
+                <button id="iti67Button" class="button primary">ITI-67 · Buscar documentos</button>
+              </div>
+            </div>
+            <div class="retrieve-row">
+              <label>Documento para recuperar
+                <input id="retrieveUrlInput" type="text" placeholder="Bundle/{id}, ID o URL completa" />
+              </label>
+              <button id="iti68Button" class="button primary">ITI-68 · Recuperar</button>
+            </div>
+          </article>
+          <article class="card results-card">
+            <div class="card-heading"><h3>Resultados</h3><span id="queryStatus" class="badge neutral">Sin consulta</span></div>
+            <div id="queryResult" class="empty-state">Ejecuta ITI-67 para localizar documentos o ITI-68 para recuperar uno.</div>
+          </article>
+        </section>
+
+        <section class="page" data-page="servers" hidden>
+          <div class="section-heading">
+            <div><span class="kicker">Configuración de conexión</span><h2>Servidores FHIR</h2><p>Selecciona el sandbox que utilizarán la validación y las transacciones del <a href="https://profiles.ihe.net/ITI/MHD/index.html" target="_blank" rel="noreferrer">Perfil MHD de IHE ↗</a>.</p></div>
+          </div>
+          <div class="server-layout">
+            <article class="card">
+              <h3>Agregar sandbox</h3>
+              <p class="card-copy">Los servidores definidos por el administrador no pueden eliminarse desde el navegador. Cada participante también puede agregar sandboxes propios, guardados localmente.</p>
+              <label>Nombre del servidor
+                <input id="serverNameInput" type="text" maxlength="80" placeholder="Sandbox de mi institución" />
+              </label>
+              <label>URL base FHIR
+                <input id="serverUrlConfigInput" type="url" inputmode="url" placeholder="https://fhir.institucion.do/fhir" />
+              </label>
+              <p class="field-help">Debe ser la URL base, no la URL de un recurso. Ejemplo: <code>https://servidor/fhir</code>.</p>
+              <div class="button-row"><button id="addServerButton" class="button primary">Agregar y seleccionar</button></div>
+              <label>Bearer token para la sesión <span class="optional">opcional</span>
+                <input id="serverTokenInput" type="password" autocomplete="off" placeholder="No se almacena en el navegador" />
+              </label>
+              <div class="notice warning"><strong>Servidores internos:</strong> un host privado debe estar autorizado mediante <code>FHIR_FETCH_ALLOWED_HOSTS</code>.</div>
+            </article>
+            <article class="card">
+              <div class="card-heading plain"><div><h3>Servidores disponibles</h3><p>El servidor marcado como activo se aplicará a $validate e ITI-65/67/68.</p></div></div>
+              <div id="serverList" class="server-list empty-state compact-empty">Cargando servidores…</div>
+            </article>
+          </div>
+        </section>
+
+        <section class="page" data-page="activity" hidden>
+          <div class="section-heading">
+            <div><span class="kicker">Evidencia técnica</span><h2>Actividad de intercambio</h2><p>Solicitudes, respuestas, errores y duración de cada operación.</p></div>
+            <div class="button-row"><button id="refreshLogsButton" class="button secondary">Actualizar</button></div>
+          </div>
+          <div id="logsList" class="logs-list empty-state">No se ha cargado la actividad.</div>
+        </section>
+      </main>
+    </div>
+  </div>
+  <dialog id="binaryPreviewDialog" class="pdf-dialog" aria-labelledby="binaryPreviewTitle">
+    <div class="pdf-dialog-heading">
+      <div><span class="kicker">Binary FHIR · application/pdf</span><h3 id="binaryPreviewTitle">Documento PDF</h3></div>
+      <form method="dialog"><button class="icon-button" type="submit" aria-label="Cerrar visor">×</button></form>
+    </div>
+    <div class="pdf-dialog-body">
+      <iframe id="binaryPreviewFrame" title="Vista previa del documento PDF"></iframe>
+    </div>
+    <div class="pdf-dialog-actions">
+      <span>La vista se genera localmente desde el contenido Base64; el archivo no se envía a otro servicio.</span>
+      <button id="binaryDownloadButton" class="button secondary" type="button">Descargar PDF</button>
+    </div>
+  </dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="/main.mjs"></script>
+</body>
+</html>

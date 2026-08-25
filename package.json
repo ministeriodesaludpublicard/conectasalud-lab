@@ -1,0 +1,22 @@
+{
+  "name": "conectasalud-lab",
+  "version": "1.6.0",
+  "description": "Laboratorio didáctico del Perfil MHD de IHE para los tres casos de uso de la Conectatón Nacional de Interoperabilidad en Salud.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "check": "node scripts/check-syntax.js",
+    "test": "node --test",
+    "verify": "npm run check && npm test"
+  },
+  "keywords": ["fhir", "ihe", "mhd", "iti-65", "interoperabilidad", "salud"],
+  "author": "",
+  "license": "ISC",
+  "engines": { "node": ">=20" },
+  "dependencies": {
+    "axios": "^1.11.0",
+    "dotenv": "^17.2.1",
+    "uuid": "^8.3.2"
+  }
+}

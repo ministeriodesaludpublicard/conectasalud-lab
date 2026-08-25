@@ -1,0 +1,26 @@
+# Dependencias
+node_modules/
+
+# Configuración local y secretos
+.env
+.env.*
+!.env.example
+
+# Datos generados durante la ejecución
+logs/
+generated/
+coverage/
+.nyc_output/
+*.log
+
+# Archivos del sistema y editores
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Paquetes locales
+*.zip
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
