@@ -1,6 +1,6 @@
 {
   "name": "conectasalud-lab",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "description": "Laboratorio didáctico del Perfil MHD de IHE para los tres casos de uso de la Conectatón Nacional de Interoperabilidad en Salud.",
   "main": "server.js",
   "scripts": {

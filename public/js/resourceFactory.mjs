@@ -25,12 +25,5 @@ export function buildManagedResource(type, data) {
     identifier: [{ type: { coding: [{ system: personIdentifierSystem, code: data.identifierType }] }, value: data.identifierValue }],
     name: [{ ...secondFamilyExtension, family: data.family, given: [data.given] }], gender: data.gender, telecom
   };
-  if (type === 'PractitionerRole') return {
-    resourceType: type, active: true,
-    practitioner: { reference: `Practitioner/${data.practitionerId}` },
-    organization: { reference: `Organization/${data.organizationId}` },
-    code: [{ coding: [{ system: 'http://terminology.hl7.org/CodeSystem/practitioner-role', code: data.roleCode, display: data.roleDisplay }], text: data.roleDisplay }],
-    specialty: data.specialtyDisplay ? [{ coding: data.specialtyCode ? [{ system: 'http://snomed.info/sct', code: data.specialtyCode, display: data.specialtyDisplay }] : undefined, text: data.specialtyDisplay }] : undefined
-  };
   throw new Error(`Tipo de recurso no administrable: ${type}`);
 }

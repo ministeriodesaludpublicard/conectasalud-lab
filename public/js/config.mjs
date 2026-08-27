@@ -22,8 +22,7 @@ export const PAGE_COPY = {
 export const RESOURCE_COPY = {
   Organization: ['Organizaciones', 'Nueva organización'],
   Patient: ['Pacientes', 'Nuevo paciente'],
-  Practitioner: ['Profesionales', 'Nuevo profesional'],
-  PractitionerRole: ['Roles profesionales', 'Nuevo rol profesional']
+  Practitioner: ['Profesionales', 'Nuevo profesional']
 };
 
 export const RESOURCE_FIELDS = {
@@ -42,10 +41,5 @@ export const RESOURCE_FIELDS = {
     ['given', 'Nombres', 'text', true], ['family', 'Primer apellido', 'text', true], ['secondFamily', 'Segundo apellido', 'text'],
     ['identifierValue', 'Identificador profesional', 'text', true], ['identifierType', 'Tipo de identificación', 'text', true, 'PRN'],
     ['phone', 'Teléfono', 'tel'], ['email', 'Correo', 'email'], ['gender', 'Sexo administrativo', 'select', false, '', [['female', 'Femenino'], ['male', 'Masculino'], ['other', 'Otro'], ['unknown', 'Desconocido']]]
-  ],
-  PractitionerRole: [
-    ['practitionerId', 'Profesional', 'relation', true, 'Practitioner'], ['organizationId', 'Organización', 'relation', true, 'Organization'],
-    ['roleCode', 'Código del rol', 'text', false, 'doctor'], ['roleDisplay', 'Descripción del rol', 'text', false, 'Médico'],
-    ['specialtyCode', 'Código de especialidad', 'text'], ['specialtyDisplay', 'Especialidad', 'text']
   ]
 };

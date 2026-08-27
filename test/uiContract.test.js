@@ -84,17 +84,17 @@ test('el alcance visible y la API excluyen ITI-66 y no permiten limpiar la activ
 });
 
 test('cada tipo de recurso base muestra su contador circular y consulta el total del servidor', () => {
-  for (const type of ['Organization', 'Patient', 'Practitioner', 'PractitionerRole']) {
+  for (const type of ['Organization', 'Patient', 'Practitioner']) {
     assert.match(html, new RegExp(`data-resource-count="${type}"`));
   }
+  assert.doesNotMatch(html, /data-resource-type="PractitionerRole"/);
   assert.match(app, /catalogTotals/);
   assert.match(app, /bundle\?\.total/);
   assert.match(app, /renderResourceCounts/);
 });
 
-test('PractitionerRole presenta una sola vez cada relación requerida', () => {
+test('PractitionerRole se interpreta, pero no se administra como recurso base', () => {
   const fields = app.split('export const RESOURCE_FIELDS =')[1] || '';
-  const block = fields.match(/PractitionerRole:\s*\[([\s\S]*?)\n\s*\]/)?.[1] || '';
-  assert.equal((block.match(/\['practitionerId'/g) || []).length, 1);
-  assert.equal((block.match(/\['organizationId'/g) || []).length, 1);
+  assert.doesNotMatch(fields, /PractitionerRole:\s*\[/);
+  assert.match(app, /resource\.resourceType === 'PractitionerRole'/);
 });

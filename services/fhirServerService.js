@@ -235,12 +235,12 @@ async function validateFHIRResource({ serverUrl, token, resource }) {
   return normalizeOperationOutcome(response.data, response.status);
 }
 
-const MANAGED_RESOURCE_TYPES = new Set(['Organization', 'Patient', 'Practitioner', 'PractitionerRole']);
+const MANAGED_RESOURCE_TYPES = new Set(['Organization', 'Patient', 'Practitioner']);
 
 function assertManagedResourceType(resourceType) {
   const cleanType = String(resourceType || '').trim();
   if (!MANAGED_RESOURCE_TYPES.has(cleanType)) {
-    throw serviceError('Solo se administran Organization, Patient, Practitioner y PractitionerRole.', 400);
+    throw serviceError('Solo se administran Organization, Patient y Practitioner.', 400);
   }
   return cleanType;
 }

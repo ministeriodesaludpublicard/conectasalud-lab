@@ -14,8 +14,8 @@ const state = {
   servers: [],
   selectedServerUrl: null,
   managedResourceType: 'Organization',
-  catalogs: { Organization: [], Patient: [], Practitioner: [], PractitionerRole: [] },
-  catalogTotals: { Organization: 0, Patient: 0, Practitioner: 0, PractitionerRole: 0 },
+  catalogs: { Organization: [], Patient: [], Practitioner: [] },
+  catalogTotals: { Organization: 0, Patient: 0, Practitioner: 0 },
   patientSearchResults: [],
   guidedPdf: null,
   resource: null,
@@ -92,8 +92,8 @@ function renderServerList() {
 }
 
 function resetServerDependentViews(server) {
-  state.catalogs = { Organization: [], Patient: [], Practitioner: [], PractitionerRole: [] };
-  state.catalogTotals = { Organization: 0, Patient: 0, Practitioner: 0, PractitionerRole: 0 };
+  state.catalogs = { Organization: [], Patient: [], Practitioner: [] };
+  state.catalogTotals = { Organization: 0, Patient: 0, Practitioner: 0 };
   state.patientSearchResults = [];
   state.validation = null;
   renderResourceCounts();
@@ -196,10 +196,6 @@ function handleServerListAction(event) {
 function formField(definition) {
   const [name, label, type, required, placeholder, options] = definition;
   if (type === 'select') return `<label>${escapeHtml(label)}<select name="${escapeHtml(name)}" ${required ? 'required' : ''}>${options.map(([value, text]) => `<option value="${escapeHtml(value)}">${escapeHtml(text)}</option>`).join('')}</select></label>`;
-  if (type === 'relation') {
-    const records = state.catalogs[placeholder] || [];
-    return `<label>${escapeHtml(label)}<select name="${escapeHtml(name)}" required><option value="">Seleccionar…</option>${records.map(item => `<option value="${escapeHtml(item.id)}">${escapeHtml(resourceDisplay(item))}</option>`).join('')}</select></label>`;
-  }
   return `<label>${escapeHtml(label)}<input name="${escapeHtml(name)}" type="${escapeHtml(type)}" ${required ? 'required' : ''} placeholder="${escapeHtml(placeholder || '')}" /></label>`;
 }
 
@@ -217,7 +213,6 @@ function renderResourceCounts() {
 }
 
 function managedResourceSecondary(resource) {
-  if (resource.resourceType === 'PractitionerRole') return [resource.practitioner?.reference, resource.organization?.reference, getCodingDisplay(resource.code?.[0])].filter(Boolean).join(' · ');
   return [resource.identifier?.[0]?.value, resource.telecom?.find(item => item.system === 'email')?.value, resource.address?.[0]?.city].filter(Boolean).join(' · ');
 }
 
@@ -251,7 +246,7 @@ async function loadManagedResources() {
   el.managedResourceList.className = 'managed-resource-list empty-state compact-empty';
   el.managedResourceList.textContent = 'Consultando el servidor FHIR…';
   try {
-    await Promise.all(['Organization', 'Patient', 'Practitioner', 'PractitionerRole'].map(type => fetchCatalog(type, context)));
+    await Promise.all(['Organization', 'Patient', 'Practitioner'].map(type => fetchCatalog(type, context)));
     if (!isCurrentServerContext(context)) return;
     renderManagedResourceForm();
     renderManagedResources();

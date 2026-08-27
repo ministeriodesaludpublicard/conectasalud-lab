@@ -67,8 +67,9 @@ test('la carga por URL bloquea protocolos no web y redes privadas no autorizadas
   );
 });
 
-test('la administración FHIR se limita a los cuatro recursos base definidos', () => {
-  for (const type of ['Organization', 'Patient', 'Practitioner', 'PractitionerRole']) assert.equal(assertManagedResourceType(type), type);
+test('la administración FHIR se limita a los tres recursos base definidos', () => {
+  for (const type of ['Organization', 'Patient', 'Practitioner']) assert.equal(assertManagedResourceType(type), type);
+  assert.throws(() => assertManagedResourceType('PractitionerRole'), /Solo se administran/);
   assert.throws(() => assertManagedResourceType('User'), /Solo se administran/);
 });
 

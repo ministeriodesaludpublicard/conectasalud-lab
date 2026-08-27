@@ -129,10 +129,11 @@ La pantalla **Recursos base** consulta y crea directamente en el servidor activo
 
 - `OrganizationDO`;
 - `PatientDO`;
-- `PractitionerDO`; y
-- `PractitionerRole` para relacionar profesional y organización.
+- `PractitionerDO`.
 
-Cada pestaña muestra un contador circular con el total informado por el servidor para ese tipo de recurso. Los cuatro totales se vuelven a consultar al entrar en la pantalla, al actualizar el listado, después de crear un recurso y al cambiar de sandbox.
+Cada pestaña muestra un contador circular con el total informado por el servidor para ese tipo de recurso. Los tres totales se vuelven a consultar al entrar en la pantalla, al actualizar el listado, después de crear un recurso y al cambiar de sandbox.
+
+`PractitionerRole` no forma parte de la administración de **Recursos base**. El editor conserva la capacidad de interpretar y validar ese tipo de recurso cuando venga incluido en un JSON o Bundle FHIR.
 
 No se crea un recurso ficticio `User`: la gestión de usuarios y autenticación no forma parte del modelo clínico FHIR.
 
@@ -198,3 +199,7 @@ git branch -M main
 git remote add origin <URL_DEL_REPOSITORIO>
 git push -u origin main
 ```
+
+## Alcance excluido en esta etapa
+
+La interfaz no expone generación desde SQL Server, PDQm, ICVP, QR/VHL, interconsulta, ITI-66 ni transacciones distintas de ITI-65/67/68. La creación de recursos base y documentos guiados existe para preparar esos tres intercambios del [Perfil MHD de IHE](https://profiles.ihe.net/ITI/MHD/index.html).
