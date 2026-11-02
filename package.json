@@ -1,0 +1,22 @@
+{
+  "name": "conectasalud-lab",
+  "version": "1.9.2",
+  "description": "Laboratorio FHIR R4 para crear, validar, publicar, buscar y recuperar documentos clínicos de la Guía FHIR DO.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "check": "node scripts/check-syntax.js",
+    "test": "node scripts/run-tests.js",
+    "verify": "npm run check && npm test"
+  },
+  "keywords": ["fhir", "openhim", "document-mediator", "interoperabilidad", "salud"],
+  "author": "",
+  "license": "ISC",
+  "engines": { "node": ">=20" },
+  "dependencies": {
+    "axios": "^1.11.0",
+    "dotenv": "^17.2.1",
+    "uuid": "^8.3.2"
+  }
+}
