@@ -226,7 +226,19 @@ main { padding: 34px clamp(22px, 4vw, 54px) 60px; }
 .issue-card .issue-guidance { margin-top: 6px; color: #445a74; font-size: .73rem; }
 .issue-path { display: block; margin-top: 6px; color: var(--muted); font: 11px/1.4 "Cascadia Code", Consolas, monospace; }
 
+<<<<<<< HEAD
 .transaction-layout { display: grid; grid-template-columns: minmax(360px,.78fr) minmax(0,1.22fr); gap: 18px; }
+=======
+.transaction-layout { display: grid; grid-template-columns: minmax(330px,.62fr) minmax(0,1.38fr); gap: 18px; align-items: start; }
+.iti65-editor-card { min-width: 0; padding: 0; overflow: hidden; }
+.iti65-pane-heading { border-bottom: 1px solid var(--line); }
+.iti65-transaction-editor { height: 520px; min-height: 320px; border-radius: 0; }
+.iti65-editor-actions { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; padding: 14px 18px; border-top: 1px solid var(--line); }
+.iti65-editor-actions .button-row { margin: 0; }
+.iti65-editor-card > .inline-message { padding: 0 18px; }
+.iti65-editor-card > .validation-content { margin: 0 18px 18px; }
+.iti65-response-card { margin-top: 18px; }
+>>>>>>> origin/master
 .server-layout { display: grid; grid-template-columns: minmax(320px,.72fr) minmax(0,1.28fr); gap: 18px; }
 .card-copy, .card-heading.plain p { color: var(--muted); font-size: .78rem; line-height: 1.55; }
 .card-heading.plain { padding: 0 0 14px; }
@@ -377,3 +389,21 @@ input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(18,104,179,.
   .binary-card, .guided-pdf-meta-row, .pdf-dialog-actions { align-items: stretch; flex-direction: column; }
   .pdf-dialog { width: calc(100vw - 16px); height: calc(100vh - 16px); }
 }
+<<<<<<< HEAD
+=======
+
+/* Explorar MHD integrado conservando la navegación del Lab */
+.query-advanced { grid-column: 1 / -1; padding: 8px 0 12px; }
+.query-advanced summary { cursor: pointer; font-weight: 700; color: var(--primary, #1769ad); margin-bottom: 11px; }
+.query-advanced label { display: grid; gap: 8px; }
+.explorer-card { margin-top: 18px; }
+.explorer-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 18px 0; align-items: end; }
+.explorer-fields > label:not(.explorer-global) { display: grid; gap: 7px; }
+.explorer-global { display: flex; gap: 9px; align-items: center; margin: 0; font-size: .86rem; }
+.explorer-global input { width: auto; margin: 0; }
+.explorer-scroll { overflow-x: auto; }
+.explorer-card .result-table td:last-child { min-width: 155px; }
+.explorer-card .result-table td code { word-break: break-all; }
+.explorer-card .result-table td .button { margin: 2px; }
+@media (max-width: 760px) { .explorer-fields { grid-template-columns: 1fr; } }
+>>>>>>> origin/master

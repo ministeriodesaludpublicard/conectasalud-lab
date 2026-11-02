@@ -27,19 +27,38 @@ function baseInput(useCase) {
   return { useCase, patientMode: 'existing', patientId: 'p1', practitionerId: 'dr1', organizationId: 'o1', encounterReason: 'Prueba guiada', diagnosis: { code: 'I10', display: 'Diagnóstico de prueba' } };
 }
 
+<<<<<<< HEAD
 test('genera los tres Bundles documentales nacionales', async () => {
   const nps = await buildGuidedDocument({ serverUrl, input: baseInput('nps') });
   const pdf = { contentType: 'application/pdf', data: Buffer.from('%PDF-1.4\n%%EOF').toString('base64') };
   const notif = await buildGuidedDocument({ serverUrl, input: { ...baseInput('notif'), symptoms: 'Fiebre', pdf } });
   const onco = await buildGuidedDocument({ serverUrl, input: { ...baseInput('onco'), stage: 'II', pdf } });
   assert.equal(nps.meta.profile[0], CASES.nps.bundle);
+=======
+test('genera los cuatro Bundles documentales nacionales', async () => {
+  const nps = await buildGuidedDocument({ serverUrl, input: baseInput('nps') });
+  const pdf = { contentType: 'application/pdf', data: Buffer.from('%PDF-1.4\n%%EOF').toString('base64') };
+  const lab = await buildGuidedDocument({ serverUrl, input: { ...baseInput('lab'), labTestCode: '718-7', labTestDisplay: 'Hemoglobin', labResultText: '12.5 g/dL', pdf } });
+  const notif = await buildGuidedDocument({ serverUrl, input: { ...baseInput('notif'), symptoms: 'Fiebre', pdf } });
+  const onco = await buildGuidedDocument({ serverUrl, input: { ...baseInput('onco'), stage: 'II', pdf } });
+  assert.equal(nps.meta.profile[0], CASES.nps.bundle);
+  assert.equal(nps.entry[0].resource.meta.profile[0], CASES.nps.composition);
+  assert.equal(nps.entry[0].resource.type.coding[0].code, '60591-5');
+  assert.equal(lab.meta.profile[0], CASES.lab.bundle);
+  assert.ok(lab.entry.some(entry => entry.resource.resourceType === 'DiagnosticReport'));
+  assert.ok(lab.entry.some(entry => entry.resource.resourceType === 'Binary'));
+>>>>>>> origin/master
   assert.equal(notif.meta.profile[0], CASES.notif.bundle);
   assert.equal(onco.meta.profile[0], CASES.onco.bundle);
   assert.ok(notif.entry.some(entry => entry.resource.resourceType === 'Binary'));
   assert.ok(onco.entry.some(entry => entry.resource.resourceType === 'Binary'));
 });
 
+<<<<<<< HEAD
 test('permite incorporar un PatientDO nuevo para crearlo en ITI-65', async () => {
+=======
+test('permite incorporar un PatientDO nuevo dentro del Bundle documental', async () => {
+>>>>>>> origin/master
   const bundle = await buildGuidedDocument({
     serverUrl,
     input: {

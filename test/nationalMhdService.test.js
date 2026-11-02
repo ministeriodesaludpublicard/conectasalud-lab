@@ -106,9 +106,17 @@ test('ITI-65 rechaza recursos simples aunque el editor sí pueda interpretarlos'
   assert.throws(() => prepareIti65Payload({ resourceType: 'Patient' }), /solo puede publicar un Bundle/);
 });
 
+<<<<<<< HEAD
 test('exige un sourceId institucional real al construir ITI-65', () => {
   assert.throws(
     () => buildNationalMhdTransaction(documentBundle(PROFILES.nps.document), { sourceId: '' }),
     /Configura MHD_SOURCE_ID/
   );
+=======
+test('agrega el sourceId institucional si está configurado y no inventa uno si falta', () => {
+  const withSource = buildNationalMhdTransaction(documentBundle(PROFILES.nps.document), { sourceId: 'urn:oid:1.2.3.4' });
+  assert.equal(withSource.entry[0].resource.extension[0].valueIdentifier.value, 'urn:oid:1.2.3.4');
+  const withoutSource = buildNationalMhdTransaction(documentBundle(PROFILES.nps.document), { sourceId: '' });
+  if (!process.env.MHD_SOURCE_ID) assert.equal(withoutSource.entry[0].resource.extension, undefined);
+>>>>>>> origin/master
 });

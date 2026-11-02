@@ -24,7 +24,29 @@ export function profilesOf(resource) {
 
 export function identifyUseCase(resource) {
   const profiles = profilesOf(resource);
+<<<<<<< HEAD
   return USE_CASES.find(item => profiles.includes(item.profile)) || null;
+=======
+  const byProfile = USE_CASES.find(item => profiles.includes(item.profile));
+  if (byProfile) return byProfile;
+  const composition = resource?.entry?.find(entry => entry.resource?.resourceType === 'Composition')?.resource;
+  return USE_CASES.find(item => (composition?.type?.coding || []).some(
+    coding => coding.system === 'http://loinc.org' && coding.code === item.code
+  )) || null;
+}
+
+/**
+ * Etiqueta de caso de uso para la interfaz. LAB no tiene un track numerado
+ * en la navegación actual; nunca debemos mostrar "Track undefined".
+ * El mapa también protege ante configuraciones conservadas en caché.
+ */
+export function formatUseCaseLabel(useCase) {
+  if (!useCase) return 'No identificado';
+  const label = String(useCase.label ?? '').trim() || 'Caso de uso sin nombre';
+  const expectedTrack = { nps: 1, notif: 2, onco: 3 }[useCase.key];
+  const track = expectedTrack || (Number.isInteger(useCase.track) && useCase.track > 0 ? useCase.track : null);
+  return track ? `Track ${track} · ${label}` : label;
+>>>>>>> origin/master
 }
 
 export function getCodingDisplay(codeable) {

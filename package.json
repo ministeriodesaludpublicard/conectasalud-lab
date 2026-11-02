@@ -1,16 +1,28 @@
 {
   "name": "conectasalud-lab",
+<<<<<<< HEAD
   "version": "1.6.1",
   "description": "Laboratorio didáctico del Perfil MHD de IHE para los tres casos de uso de la Conectatón Nacional de Interoperabilidad en Salud.",
+=======
+  "version": "1.9.2",
+  "description": "Laboratorio FHIR R4 para crear, validar, publicar, buscar y recuperar documentos clínicos de la Guía FHIR DO.",
+>>>>>>> origin/master
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js",
     "check": "node scripts/check-syntax.js",
+<<<<<<< HEAD
     "test": "node --test",
     "verify": "npm run check && npm test"
   },
   "keywords": ["fhir", "ihe", "mhd", "iti-65", "interoperabilidad", "salud"],
+=======
+    "test": "node scripts/run-tests.js",
+    "verify": "npm run check && npm test"
+  },
+  "keywords": ["fhir", "openhim", "document-mediator", "interoperabilidad", "salud"],
+>>>>>>> origin/master
   "author": "",
   "license": "ISC",
   "engines": { "node": ">=20" },

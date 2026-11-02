@@ -29,7 +29,15 @@ function serveStatic(req, res, publicDir) {
     sendJson(res, 404, { ok: false, error: 'Recurso no encontrado.' });
     return;
   }
+<<<<<<< HEAD
   res.writeHead(200, { 'Content-Type': MIME_TYPES[path.extname(filePath)] || 'application/octet-stream' });
+=======
+  const extension = path.extname(filePath).toLowerCase();
+  const headers = { 'Content-Type': MIME_TYPES[extension] || 'application/octet-stream' };
+  // Evita reutilizar versiones anteriores de HTML y módulos tras desplegar cambios.
+  if (['.html', '.js', '.mjs'].includes(extension)) headers['Cache-Control'] = 'no-cache, must-revalidate';
+  res.writeHead(200, headers);
+>>>>>>> origin/master
   fs.createReadStream(filePath).pipe(res);
 }
 

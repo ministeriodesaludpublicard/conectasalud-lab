@@ -22,16 +22,26 @@
         <button class="nav-link" data-page-target="resources"><span>◇</span><span>Recursos base</span></button>
         <button class="nav-link" data-page-target="guided"><span>＋</span><span>Casos guiados</span></button>
         <button class="nav-link" data-page-target="editor"><span>{ }</span><span>Editor y validador</span></button>
+<<<<<<< HEAD
         <button class="nav-link" data-page-target="iti65"><span>↑</span><span>Publicar · ITI-65</span></button>
         <button class="nav-link" data-page-target="queries"><span>⌕</span><span>Consultar · ITI-67/68</span></button>
+=======
+        <button class="nav-link" data-page-target="iti65"><span>↑</span><span>Publicar documento</span></button>
+        <button class="nav-link" data-page-target="queries"><span>⌕</span><span>Consultar documentos</span></button>
+>>>>>>> origin/master
         <button class="nav-link" data-page-target="servers"><span>⚙</span><span>Servidores FHIR</span></button>
         <button class="nav-link" data-page-target="activity"><span>≡</span><span>Actividad técnica</span></button>
       </nav>
 
       <div class="scope-card">
         <small>ALCANCE ACTUAL</small>
+<<<<<<< HEAD
         <div><span>ITI-65</span><span>ITI-67</span><span>ITI-68</span></div>
         <p>FHIR R4 · <a href="https://profiles.ihe.net/ITI/MHD/index.html" target="_blank" rel="noreferrer">Perfil MHD de IHE ↗</a> · Guía FHIR DO</p>
+=======
+        <div><span>PUBLICAR</span><span>BUSCAR</span><span>RECUPERAR</span></div>
+        <p>FHIR R4 · OpenHIM · <a href="https://digital.msp.gob.do/fhir/conectaton/" target="_blank" rel="noreferrer">Guía FHIR DO ↗</a></p>
+>>>>>>> origin/master
       </div>
     </aside>
 
@@ -41,7 +51,11 @@
         <div>
           <p class="eyebrow">Laboratorio didáctico de interoperabilidad</p>
           <h1 id="pageTitle">Inicio</h1>
+<<<<<<< HEAD
           <p id="pageDescription">Practica los tres casos de uso mediante el Perfil MHD de IHE.</p>
+=======
+          <p id="pageDescription">Crea, valida e intercambia los cuatro documentos clínicos de la Guía FHIR DO.</p>
+>>>>>>> origin/master
         </div>
         <div class="connection-box">
           <span id="connectionDot" class="connection-dot"></span>
@@ -57,6 +71,7 @@
             <div>
               <span class="kicker">Conectatón Nacional de Interoperabilidad en Salud</span>
               <h2>Crea, valida e intercambia documentos clínicos</h2>
+<<<<<<< HEAD
               <p>El laboratorio sigue la Guía FHIR DO: administra recursos en el sandbox activo, guía la autoría de los tres casos nacionales y ejecuta ITI-65, ITI-67 e ITI-68 del <a href="https://profiles.ihe.net/ITI/MHD/index.html" target="_blank" rel="noreferrer">Perfil MHD de IHE ↗</a>.</p>
               <div class="button-row">
                 <button class="button primary" data-page-target="guided">Crear caso guiado</button>
@@ -70,11 +85,30 @@
               <div><span>67</span><strong>Buscar índices</strong><small>Find Document References</small></div>
               <i>→</i>
               <div><span>68</span><strong>Recuperar</strong><small>Retrieve Document</small></div>
+=======
+              <p>El laboratorio administra recursos en el sandbox activo, guía la autoría de cuatro documentos nacionales y utiliza el mediador documental detrás de OpenHIM para publicarlos, buscarlos y recuperarlos.</p>
+              <div class="button-row">
+                <button class="button primary" data-page-target="guided">Crear caso guiado</button>
+                <button class="button ghost" data-page-target="editor">Abrir editor FHIR</button>
+                <a class="button ghost" href="https://digital.msp.gob.do/fhir/conectaton/" target="_blank" rel="noreferrer">Consultar guía oficial ↗</a>
+              </div>
+            </div>
+            <div class="flow-card" aria-label="Secuencia del intercambio documental">
+              <div><span>1</span><strong>Publicar</strong><small>Bundle document</small></div>
+              <i>→</i>
+              <div><span>2</span><strong>Buscar índices</strong><small>Bundle searchset</small></div>
+              <i>→</i>
+              <div><span>3</span><strong>Recuperar</strong><small>Bundle document</small></div>
+>>>>>>> origin/master
             </div>
           </article>
 
           <div class="section-heading">
+<<<<<<< HEAD
             <div><span class="kicker">Tres casos de uso</span><h2>Perfiles priorizados por la guía nacional</h2></div>
+=======
+            <div><span class="kicker">Cuatro tipos documentales</span><h2>Perfiles priorizados por la guía nacional</h2></div>
+>>>>>>> origin/master
           </div>
           <div class="use-case-grid">
             <article class="use-case-card blue">
@@ -82,30 +116,57 @@
               <h3>Resumen de Paciente</h3>
               <p>Intercambio de antecedentes, medicación actual y alergias mediante un documento clínico estructurado.</p>
               <code>BundleNPSDO</code>
+<<<<<<< HEAD
               <a href="https://igrepdom.netlify.app/resumenpaciente" target="_blank" rel="noreferrer">Ver perfiles ↗</a>
+=======
+              <a href="https://digital.msp.gob.do/fhir/conectaton/resumenpaciente" target="_blank" rel="noreferrer">Ver perfiles ↗</a>
+            </article>
+            <article class="use-case-card blue">
+              <span class="track">LAB</span><div class="case-icon">LAB</div>
+              <h3>Informe de laboratorio</h3>
+              <p>Informe diagnóstico estructurado con su representación clínica en PDF.</p>
+              <code>BundleLabDO</code>
+              <a href="https://digital.msp.gob.do/fhir/conectaton/StructureDefinition-BundleLabDO.html" target="_blank" rel="noreferrer">Ver perfil ↗</a>
+>>>>>>> origin/master
             </article>
             <article class="use-case-card teal">
               <span class="track">TRACK 2</span><div class="case-icon">VE</div>
               <h3>Evento epidemiológico</h3>
               <p>Notificación individual de casos y transmisión del documento asociado hacia vigilancia nacional.</p>
               <code>BundleNotifDO</code>
+<<<<<<< HEAD
               <a href="https://igrepdom.netlify.app/notificacionepidemiologica" target="_blank" rel="noreferrer">Ver perfiles ↗</a>
+=======
+              <a href="https://digital.msp.gob.do/fhir/conectaton/notificacionepidemiologica" target="_blank" rel="noreferrer">Ver perfiles ↗</a>
+>>>>>>> origin/master
             </article>
             <article class="use-case-card amber">
               <span class="track">TRACK 3</span><div class="case-icon">RENAC</div>
               <h3>Registro Nacional de Cáncer</h3>
               <p>Publicación y recuperación del resumen oncológico requerido para el registro nacional.</p>
               <code>BundleOncoDO</code>
+<<<<<<< HEAD
               <a href="https://igrepdom.netlify.app/resumenoncologico" target="_blank" rel="noreferrer">Ver perfiles ↗</a>
             </article>
           </div>
 
           <div class="notice info"><strong>Regla didáctica:</strong> el editor interpreta cualquier recurso FHIR R4, pero ITI-65 solo acepta un Bundle documental de uno de estos tres casos o una transacción <code>BundleTransaccDO</code> ya construida.</div>
+=======
+              <a href="https://digital.msp.gob.do/fhir/conectaton/resumenoncologico" target="_blank" rel="noreferrer">Ver perfiles ↗</a>
+            </article>
+          </div>
+
+          <div class="notice info"><strong>Regla de publicación:</strong> el editor interpreta cualquier recurso FHIR R4, pero el mediador solo acepta un <code>Bundle.type=document</code> con identificador, Composition como primera entrada y Patient incluido.</div>
+>>>>>>> origin/master
         </section>
 
         <section class="page" data-page="resources" hidden>
           <div class="section-heading">
+<<<<<<< HEAD
             <div><span class="kicker">Datos maestros FHIR</span><h2>Recursos base del servidor activo</h2><p>Crea y consulta los pacientes, profesionales y organizaciones que utilizarán los tres casos de uso.</p></div>
+=======
+            <div><span class="kicker">Datos maestros FHIR</span><h2>Recursos base del servidor activo</h2><p>Crea y consulta los pacientes, profesionales y organizaciones utilizados por los documentos clínicos.</p></div>
+>>>>>>> origin/master
             <div class="button-row"><button id="refreshResourcesButton" class="button secondary">Actualizar listado</button></div>
           </div>
           <div class="resource-admin-tabs" role="tablist">
@@ -138,9 +199,15 @@
             <form id="guidedCaseForm">
               <div class="form-grid three-columns">
                 <label>Caso de uso
+<<<<<<< HEAD
                   <select id="guidedUseCase"><option value="nps">Continuidad asistencial · NPS/IPS</option><option value="notif">Evento epidemiológico</option><option value="onco">Registro Nacional de Cáncer</option></select>
                 </label>
                 <label>Origen del paciente<select id="guidedPatientMode"><option value="existing">Paciente existente</option><option value="new">Crear dentro de ITI-65</option></select></label>
+=======
+                  <select id="guidedUseCase"><option value="nps">Continuidad asistencial · NPS/IPS</option><option value="lab">Informe de laboratorio</option><option value="notif">Evento epidemiológico · eCR</option><option value="onco">Registro Nacional de Cáncer · RENAC</option></select>
+                </label>
+                <label>Origen del paciente<select id="guidedPatientMode"><option value="existing">Paciente existente</option><option value="new">Incluir PatientDO nuevo</option></select></label>
+>>>>>>> origin/master
                 <label>Profesional autor<select id="guidedPractitioner"><option value="">Cargar recursos…</option></select></label>
                 <label>Organización custodia<select id="guidedOrganization"><option value="">Cargar recursos…</option></select></label>
                 <label>Fecha de la atención<input id="guidedDate" type="datetime-local" /></label>
@@ -167,8 +234,13 @@
               </div>
 
               <div id="guidedNewPatientFields" class="guided-case-fields" hidden>
+<<<<<<< HEAD
                 <h3>Paciente nuevo para la transacción</h3>
                 <p class="field-help">El PatientDO se incluirá en el Bundle y se creará mediante <code>POST Patient</code> al ejecutar ITI-65.</p>
+=======
+                <h3>Paciente nuevo dentro del documento</h3>
+                <p class="field-help">El PatientDO se incluirá dentro del Bundle documental. La resolución de identidad corresponde al mediador cuando el MPI esté habilitado.</p>
+>>>>>>> origin/master
                 <div class="form-grid three-columns">
                   <label>Nombres<input id="newPatientGiven" type="text" /></label>
                   <label>Primer apellido<input id="newPatientFamily" type="text" /></label>
@@ -183,6 +255,18 @@
                 </div>
               </div>
 
+<<<<<<< HEAD
+=======
+              <div id="guidedLabFields" class="guided-case-fields" hidden>
+                <h3>Información del informe de laboratorio</h3>
+                <div class="form-grid three-columns">
+                  <label>Prueba · código LOINC<input id="labTestCode" type="text" value="11502-2" /></label>
+                  <label>Prueba · descripción<input id="labTestDisplay" type="text" value="Laboratory report" /></label>
+                  <label>Conclusión o resumen<input id="labResultText" type="text" placeholder="Resultado final del informe" /></label>
+                </div>
+              </div>
+
+>>>>>>> origin/master
               <div id="guidedNpsFields" class="guided-case-fields">
                 <h3>Información del NPS/IPS</h3>
                 <div class="form-grid three-columns">
@@ -221,7 +305,11 @@
 
               <div id="guidedPdfField" class="guided-case-fields" hidden>
                 <h3>Documento clínico PDF</h3>
+<<<<<<< HEAD
                 <label>Archivo PDF requerido para vigilancia y RENAC<input id="guidedPdfInput" type="file" accept="application/pdf,.pdf" /></label>
+=======
+                <label>Archivo PDF requerido para laboratorio, vigilancia y RENAC<input id="guidedPdfInput" type="file" accept="application/pdf,.pdf" /></label>
+>>>>>>> origin/master
                 <div class="guided-pdf-meta-row">
                   <p id="guidedPdfMeta" class="field-help">No se ha seleccionado un archivo.</p>
                   <button id="previewGuidedPdfButton" class="button ghost compact" type="button" hidden>Visualizar PDF</button>
@@ -253,7 +341,11 @@
               <input id="resourceUrlInput" type="url" inputmode="url" placeholder="https://servidor-fhir.example/fhir/Patient/123" />
               <button id="loadUrlButton" class="button secondary">Obtener recurso</button>
             </div>
+<<<<<<< HEAD
             <small class="field-help">Si la URL requiere autenticación, se utilizará el Bearer token configurado en ITI-65. Por seguridad, los hosts privados deben autorizarse en la configuración.</small>
+=======
+            <small class="field-help">Si la URL requiere autenticación, se utilizará el token de la sesión configurado en Servidores FHIR. Por seguridad, los hosts privados deben autorizarse en la configuración.</small>
+>>>>>>> origin/master
           </div>
 
           <div class="workbench-grid">
@@ -289,7 +381,11 @@
               <div><span class="step-number">3</span><div><strong>Validación contra el servidor</strong><small>POST /{resourceType}/$validate · OperationOutcome</small></div></div>
               <div class="button-row">
                 <button id="validateButton" class="button primary" disabled>Validar $validate</button>
+<<<<<<< HEAD
                 <button class="button secondary" data-page-target="iti65">Continuar a ITI-65</button>
+=======
+                <button class="button secondary" data-page-target="iti65">Continuar a publicación</button>
+>>>>>>> origin/master
               </div>
             </div>
             <div id="validationResult" class="validation-content empty-state compact-empty">Ejecuta <strong>$validate</strong> para comprobar FHIR R4, perfiles, terminología y referencias.</div>
@@ -298,6 +394,7 @@
 
         <section class="page" data-page="iti65" hidden>
           <div class="section-heading">
+<<<<<<< HEAD
             <div><span class="kicker"><a href="https://profiles.ihe.net/ITI/MHD/index.html" target="_blank" rel="noreferrer">Perfil MHD de IHE ↗</a> · Provide Document Bundle</span><h2>ITI-65 · Publicar documento</h2><p>Utiliza el recurso activo del editor. Los Bundles documentales se envuelven automáticamente en <code>BundleTransaccDO</code>.</p></div>
           </div>
           <div class="transaction-layout">
@@ -321,10 +418,49 @@
               <div id="iti65Result" class="empty-state">La respuesta del servidor y los recursos creados aparecerán aquí.</div>
             </article>
           </div>
+=======
+            <div><span class="kicker">OpenHIM · Document mediator</span><h2>Publicar documento</h2><p>Genera y revisa la transacción <code>Bundle.type=transaction</code> antes de enviarla a OpenHIM.</p></div>
+          </div>
+          <div class="transaction-layout">
+            <article class="card">
+              <h3>Documento de origen</h3>
+              <div id="iti65ResourceSummary" class="resource-selection empty-state compact-empty">Todavía no hay un recurso válido en el editor.</div>
+              <div class="notice info"><strong>Qué ocurrirá:</strong> se construirá una transacción ITI-65 con List, DocumentReference, Bundle y Patient. El mediador almacenará el documento y creará el índice documental.</div>
+              <div class="button-row">
+                <button id="prepareIti65Button" class="button secondary" disabled>Generar transacción ITI-65</button>
+                <button class="button ghost" data-page-target="editor">Volver al documento</button>
+              </div>
+            </article>
+            <article class="card iti65-editor-card">
+              <div class="pane-heading iti65-pane-heading">
+                <div><span class="step-number">2</span><div><strong>Transacción ITI-65 · previsualización y edición</strong><small id="iti65TransactionMeta">Carga el documento desde el editor principal</small></div></div>
+                <span id="iti65TransactionSyntax" class="badge neutral">Sin cargar</span>
+              </div>
+              <textarea id="iti65TransactionEditor" class="json-editor iti65-transaction-editor" spellcheck="false" aria-label="Editor del Bundle documental" placeholder="Primero genera la transacción ITI-65. Aquí podrás inspeccionar sus cuatro recursos antes de publicarla."></textarea>
+              <div id="iti65TransactionMessage" class="inline-message"></div>
+              <div class="iti65-editor-actions">
+                <div class="button-row">
+                  <button id="formatIti65Button" class="button ghost" disabled>Formatear</button>
+                  <button id="downloadIti65Button" class="button ghost" disabled>Descargar JSON</button>
+                </div>
+                <div class="button-row">
+                  <button id="iti65ValidateButton" class="button secondary" disabled>Validar documento original</button>
+                  <button id="iti65SendButton" class="button primary" disabled>Publicar transacción</button>
+                </div>
+              </div>
+              <div id="iti65TransactionValidation" class="validation-content empty-state compact-empty">La generación no realiza escrituras. Revisa List, DocumentReference, Bundle y Patient antes de publicar.</div>
+            </article>
+          </div>
+          <article class="card response-card iti65-response-card">
+            <div class="card-heading plain"><div><h3>Resultado de la publicación</h3><p>Respuesta del mediador e identificadores asignados al documento y su índice.</p></div></div>
+            <div id="iti65Result" class="empty-state">La respuesta del mediador aparecerá aquí.</div>
+          </article>
+>>>>>>> origin/master
         </section>
 
         <section class="page" data-page="queries" hidden>
           <div class="section-heading">
+<<<<<<< HEAD
             <div><span class="kicker"><a href="https://profiles.ihe.net/ITI/MHD/index.html" target="_blank" rel="noreferrer">Perfil MHD de IHE ↗</a> · Consulta y recuperación</span><h2>ITI-67 · ITI-68</h2><p>Localiza las referencias documentales de un paciente y recupera el Bundle seleccionado.</p></div>
           </div>
           <article class="query-console card">
@@ -334,24 +470,80 @@
               </label>
               <div class="button-row bottom-aligned">
                 <button id="iti67Button" class="button primary">ITI-67 · Buscar documentos</button>
+=======
+            <div><span class="kicker">OpenHIM · Document mediator</span><h2>Buscar y recuperar documentos</h2><p>Consulta el índice por identidad del paciente y recupera el Bundle usando el identificador devuelto.</p></div>
+          </div>
+          <article class="query-console card">
+            <div class="query-inputs">
+              <label>Tipo de identificador
+                <select id="patientIdentifierTypeSelect"><option value="cedula">Cédula dominicana</option><option value="passport">Pasaporte</option><option value="institutional">Identificador institucional</option><option value="custom">Otro (URI personalizada)</option></select>
+              </label>
+              <label>Número de identificación
+                <input id="patientIdentifierInput" type="text" placeholder="Ej.: 00100000001" />
+              </label>
+              <details class="span-two query-advanced" id="patientIdentifierAdvanced">
+                <summary>Parámetros avanzados FHIR · system del identificador</summary>
+                <label>URI system
+                  <input id="patientIdentifierSystemInput" type="text" value="https://digital.msp.gob.do/fhir/sid/cedula" placeholder="https://.../NamingSystem/... o urn:oid:..." />
+                </label>
+                <p class="field-help">La URI debe coincidir con la usada por el índice documental. Se puede modificar para pruebas de interoperabilidad.</p>
+              </details>
+              <label>Tipo documental <span class="optional">opcional</span>
+                <select id="documentTypeFilter"><option value="">Todos</option><option value="60591-5">NPS / IPS</option><option value="11502-2">Informe de laboratorio</option><option value="68991-9">Notificación epidemiológica</option><option value="115562-1">RENAC / Cáncer</option></select>
+              </label>
+              <label>Estado del documento (ITI-67)
+                <select id="documentStatusFilter"><option value="current">current · Vigente</option><option value="superseded">superseded · Reemplazado</option><option value="entered-in-error">entered-in-error · Registrado por error</option></select>
+              </label>
+              <div class="button-row bottom-aligned">
+                <button id="iti67Button" class="button primary">Buscar documentos</button>
+>>>>>>> origin/master
               </div>
             </div>
             <div class="retrieve-row">
               <label>Documento para recuperar
+<<<<<<< HEAD
                 <input id="retrieveUrlInput" type="text" placeholder="Bundle/{id}, ID o URL completa" />
               </label>
               <button id="iti68Button" class="button primary">ITI-68 · Recuperar</button>
+=======
+                <input id="retrieveUrlInput" type="text" placeholder="doc-… o URL devuelta por la búsqueda" />
+              </label>
+              <button id="iti68Button" class="button primary">Recuperar documento</button>
+>>>>>>> origin/master
             </div>
           </article>
           <article class="card results-card">
             <div class="card-heading"><h3>Resultados</h3><span id="queryStatus" class="badge neutral">Sin consulta</span></div>
+<<<<<<< HEAD
             <div id="queryResult" class="empty-state">Ejecuta ITI-67 para localizar documentos o ITI-68 para recuperar uno.</div>
+=======
+            <div id="queryResult" class="empty-state">Busca documentos por paciente o recupera uno mediante el identificador retornado por el mediador.</div>
+          </article>
+          <article class="card explorer-card" id="documentExplorerPanel">
+            <div class="card-heading plain"><div><h3>Explorador de registros e inventarios documentales</h3><p>Consulta el índice o un repositorio FHIR configurado. Las búsquedas por paciente usan DocumentReference; los inventarios globales requieren habilitación del administrador.</p></div></div>
+            <div class="explorer-fields">
+              <label>Servidor documental
+                <select id="explorerServerSelect" aria-label="Servidor de registro o repositorio"></select>
+              </label>
+              <label>Recurso a explorar
+                <select id="explorerResourceType"><option value="DocumentReference">Índices · DocumentReference</option><option value="Bundle">Documentos · Bundle</option><option value="Binary">Adjuntos · Binary</option></select>
+              </label>
+              <label class="explorer-global"><input type="checkbox" id="explorerGlobalToggle" /> Inventario global (sin filtrar por paciente)</label>
+              <div class="button-row"><button class="button secondary" id="explorerSearchButton">Explorar servidor</button><button class="button ghost" id="explorerNextButton" disabled>Siguiente página</button></div>
+            </div>
+            <p id="explorerHelp" class="field-help">La consulta por paciente utiliza el identificador configurado arriba. No todos los repositorios admiten enumeración de Bundles o Binary.</p>
+            <div id="explorerResult" class="empty-state compact-empty">Selecciona un servidor de registro o repositorio y ejecuta una consulta.</div>
+>>>>>>> origin/master
           </article>
         </section>
 
         <section class="page" data-page="servers" hidden>
           <div class="section-heading">
+<<<<<<< HEAD
             <div><span class="kicker">Configuración de conexión</span><h2>Servidores FHIR</h2><p>Selecciona el sandbox que utilizarán la validación y las transacciones del <a href="https://profiles.ihe.net/ITI/MHD/index.html" target="_blank" rel="noreferrer">Perfil MHD de IHE ↗</a>.</p></div>
+=======
+            <div><span class="kicker">Configuración de conexión</span><h2>Servidores FHIR</h2><p>Configura servidores FHIR generales, registros de índices y repositorios documentales sin cambiar el circuito de publicación ITI-65 por OpenHIM.</p></div>
+>>>>>>> origin/master
           </div>
           <div class="server-layout">
             <article class="card">
@@ -371,8 +563,14 @@
               <div class="notice warning"><strong>Servidores internos:</strong> un host privado debe estar autorizado mediante <code>FHIR_FETCH_ALLOWED_HOSTS</code>.</div>
             </article>
             <article class="card">
+<<<<<<< HEAD
               <div class="card-heading plain"><div><h3>Servidores disponibles</h3><p>El servidor marcado como activo se aplicará a $validate e ITI-65/67/68.</p></div></div>
               <div id="serverList" class="server-list empty-state compact-empty">Cargando servidores…</div>
+=======
+              <div class="card-heading plain"><div><h3>Servidores disponibles</h3><p>El servidor activo se aplica a recursos base y autoría. La URL de validación se configura por separado en el servidor.</p></div></div>
+              <div id="serverList" class="server-list empty-state compact-empty">Cargando servidores…</div>
+              <p class="field-help">Los registros y repositorios oficiales se configuran desde <code>FHIR_SERVERS_JSON</code>. Los sandboxes agregados en el navegador se usan para recursos generales; no otorgan acceso automático a inventarios documentales.</p>
+>>>>>>> origin/master
             </article>
           </div>
         </section>
@@ -401,6 +599,10 @@
     </div>
   </dialog>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
+<<<<<<< HEAD
   <script type="module" src="/main.mjs"></script>
+=======
+  <script type="module" src="/main.mjs?v=1.9.1"></script>
+>>>>>>> origin/master
 </body>
 </html>

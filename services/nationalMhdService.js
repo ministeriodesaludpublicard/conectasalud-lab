@@ -12,7 +12,17 @@ const PROFILES = {
     label: 'Resumen de Paciente',
     document: `${CANONICAL_BASE}/BundleNPSDO`,
     documentReference: `${CANONICAL_BASE}/DocumentReferenceDO`,
+<<<<<<< HEAD
     type: { system: 'http://loinc.org', code: '34105-7', display: 'Summarization of episode note' }
+=======
+    type: { system: 'http://loinc.org', code: '60591-5', display: 'Patient summary Document' }
+  },
+  lab: {
+    key: 'lab', label: 'Informe de laboratorio',
+    document: `${CANONICAL_BASE}/BundleLabDO`,
+    documentReference: `${CANONICAL_BASE}/DocumentReferenceDOLab`,
+    type: { system: 'http://loinc.org', code: '11502-2', display: 'Laboratory report' }
+>>>>>>> origin/master
   },
   onco: {
     key: 'onco',
@@ -42,8 +52,18 @@ function getProfiles(resource) {
 
 function identifyNationalUseCase(resource) {
   const profiles = getProfiles(resource);
+<<<<<<< HEAD
   return [PROFILES.nps, PROFILES.onco, PROFILES.notif]
     .find(useCase => profiles.includes(useCase.document)) || null;
+=======
+  const cases = [PROFILES.nps, PROFILES.lab, PROFILES.onco, PROFILES.notif];
+  const matchingProfile = cases.find(useCase => profiles.includes(useCase.document));
+  if (matchingProfile) return matchingProfile;
+  const composition = findDocumentEntry(resource, 'Composition')?.resource;
+  return cases.find(useCase => (composition?.type?.coding || []).some(
+    coding => coding.system === useCase.type.system && coding.code === useCase.type.code
+  )) || null;
+>>>>>>> origin/master
 }
 
 function findDocumentEntry(bundle, resourceType) {
@@ -115,14 +135,30 @@ function buildNationalMhdTransaction(documentBundle, options = {}) {
   }
 
   const patient = clone(patientEntry.resource);
+<<<<<<< HEAD
+=======
+  if (!(patient.identifier || []).some(i => i.system && i.value)) {
+    throw new Error('El paciente debe tener al menos un identificador con system y value.');
+  }
+>>>>>>> origin/master
   ensureFhirId(patient);
   patient.meta = patient.meta || {};
   if (!getProfiles(patient).includes(PROFILES.patient)) {
     patient.meta.profile = [...getProfiles(patient), PROFILES.patient];
   }
 
+<<<<<<< HEAD
   const patientExists = /^https?:\/\//i.test(String(patientEntry.fullUrl || '')) && Boolean(patient.id);
   const patientFullUrl = patientExists ? patientEntry.fullUrl : `urn:uuid:${uuidv4()}`;
+=======
+  // Un Patient ya existente, expresamente referenciado por su URL FHIR, se
+  // actualiza conservando su identificador. Un paciente nuevo (fullUrl urn:uuid)
+  // se crea con POST para evitar sobrescrituras accidentales.
+  const existingPatientUrl = String(patientEntry.fullUrl || '').trim();
+  const existingMatch = /^https?:\/\/[^\s]+\/Patient\/([A-Za-z0-9.\-]{1,64})$/.exec(existingPatientUrl);
+  const patientIsExisting = !!existingMatch && existingMatch[1] === patient.id;
+  const patientFullUrl = patientIsExisting ? existingPatientUrl : `urn:uuid:${uuidv4()}`;
+>>>>>>> origin/master
   const documentFullUrl = `urn:uuid:${uuidv4()}`;
   const documentReferenceFullUrl = `urn:uuid:${uuidv4()}`;
   const listFullUrl = `urn:uuid:${uuidv4()}`;
@@ -130,20 +166,28 @@ function buildNationalMhdTransaction(documentBundle, options = {}) {
   const documentReferenceId = uuidv4();
   const listId = uuidv4();
   const sourceId = String(options.sourceId || process.env.MHD_SOURCE_ID || '').trim();
+<<<<<<< HEAD
   if (!sourceId) {
     const error = new Error('Configura MHD_SOURCE_ID con el identificador OID o URI de la institución antes de ejecutar ITI-65.');
     error.statusCode = 400;
     throw error;
   }
+=======
+
+>>>>>>> origin/master
 
   const documentReference = {
     resourceType: 'DocumentReference',
     id: documentReferenceId,
     meta: { profile: [useCase.documentReference] },
+<<<<<<< HEAD
     masterIdentifier: {
       system: 'urn:ietf:rfc:3986',
       value: `urn:uuid:${documentReferenceId}`
     },
+=======
+    masterIdentifier: clone(document.identifier),
+>>>>>>> origin/master
     status: 'current',
     type: { coding: [getCompositionType(document, useCase)] },
     subject: { reference: patientFullUrl },
@@ -160,10 +204,17 @@ function buildNationalMhdTransaction(documentBundle, options = {}) {
     resourceType: 'List',
     id: listId,
     meta: { profile: [PROFILES.list] },
+<<<<<<< HEAD
     extension: [{
       url: 'https://profiles.ihe.net/ITI/MHD/StructureDefinition/ihe-sourceId',
       valueIdentifier: { value: sourceId }
     }],
+=======
+    ...(sourceId ? { extension: [{
+      url: 'https://profiles.ihe.net/ITI/MHD/StructureDefinition/ihe-sourceId',
+      valueIdentifier: { system: options.sourceIdSystem || 'urn:ietf:rfc:3986', value: sourceId }
+    }] } : {}),
+>>>>>>> origin/master
     status: 'current',
     mode: 'working',
     code: {
@@ -190,8 +241,13 @@ function buildNationalMhdTransaction(documentBundle, options = {}) {
       {
         fullUrl: patientFullUrl,
         resource: patient,
+<<<<<<< HEAD
         request: patientExists
           ? { method: 'PUT', url: `Patient/${encodeURIComponent(patient.id)}` }
+=======
+        request: patientIsExisting
+          ? { method: 'PUT', url: `Patient/${patient.id}` }
+>>>>>>> origin/master
           : { method: 'POST', url: 'Patient' }
       }
     ]
@@ -204,9 +260,12 @@ function prepareIti65Payload(resource, options = {}) {
   }
 
   if (resource.type === 'transaction') {
+<<<<<<< HEAD
     if (!getProfiles(resource).includes(PROFILES.transaction)) {
       throw new Error('El Bundle transaction debe declarar el perfil nacional BundleTransaccDO.');
     }
+=======
+>>>>>>> origin/master
     if (!Array.isArray(resource.entry) || resource.entry.length === 0) {
       throw new Error('El BundleTransaccDO no contiene entradas para procesar.');
     }

@@ -2,7 +2,10 @@ const axios = require('axios');
 const dns = require('dns').promises;
 const net = require('net');
 const { appendLog } = require('./logger');
+<<<<<<< HEAD
 const { prepareIti65Payload, saveSubmittedTransaction } = require('./nationalMhdService');
+=======
+>>>>>>> origin/master
 
 function normalizeBaseUrl(serverUrl) {
   if (!serverUrl) throw new Error('Debe configurar la URL base del servidor FHIR.');
@@ -282,6 +285,7 @@ async function createManagedResource({ serverUrl, token, resourceType, resource 
   };
 }
 
+<<<<<<< HEAD
 async function provideDocumentIti65({ serverUrl, token, resource, sourceId }) {
   const prepared = prepareIti65Payload(resource, { sourceId });
   const saved = saveSubmittedTransaction(prepared.transaction);
@@ -306,6 +310,8 @@ async function provideDocumentIti65({ serverUrl, token, resource, sourceId }) {
   };
 }
 
+=======
+>>>>>>> origin/master
 function buildUrlWithQuery(url, params = {}) {
   const result = new URL(url);
   Object.entries(params).forEach(([key, value]) => {
@@ -341,6 +347,7 @@ async function searchPatients({ serverUrl, token, criteria }) {
   return { status: response.status, requestUrl: url, bundle: response.data };
 }
 
+<<<<<<< HEAD
 async function findDocumentReferences({ serverUrl, token, patientIdentifier }) {
   if (!String(patientIdentifier || '').trim()) throw new Error('Debe indicar el identificador del paciente para ITI-67.');
   const url = buildUrlWithQuery(`${normalizeBaseUrl(serverUrl)}/DocumentReference`, {
@@ -377,6 +384,8 @@ async function retrieveDocument({ serverUrl, token, retrieveUrl }) {
   return { status: response.status, requestUrl: url, bundle: response.data };
 }
 
+=======
+>>>>>>> origin/master
 module.exports = {
   testFHIRServer,
   isPrivateNetworkAddress,
@@ -389,10 +398,15 @@ module.exports = {
   searchManagedResources,
   readManagedResource,
   createManagedResource,
+<<<<<<< HEAD
   provideDocumentIti65,
   buildPatientSearchUrl,
   searchPatients,
   findDocumentReferences,
   resolveRetrieveUrl,
   retrieveDocument
+=======
+  buildPatientSearchUrl,
+  searchPatients
+>>>>>>> origin/master
 };

@@ -19,7 +19,12 @@ function parseServersJson(value, warn = console.warn) {
     return parsed.map((item, index) => ({
       id: String(item?.id || `configured-${index + 1}`),
       name: String(item?.name || `Servidor FHIR ${index + 1}`),
+<<<<<<< HEAD
       url: normalizeServerUrl(item?.url),
+=======
+      url: normalizeServerUrl(item?.url || item?.baseUrl),
+      role: ['general', 'registry', 'repository'].includes(item?.role) ? item.role : 'general',
+>>>>>>> origin/master
       locked: true
     }));
   } catch (error) {
@@ -34,6 +39,10 @@ function parseConfiguredServers(env = process.env, warn = console.warn) {
     id: 'configured-default',
     name: String(env.HAPI_FHIR_NAME || 'Servidor FHIR predeterminado'),
     url: primaryUrl,
+<<<<<<< HEAD
+=======
+    role: 'general',
+>>>>>>> origin/master
     locked: true
   };
   return [primary, ...parseServersJson(env.FHIR_SERVERS_JSON, warn)]

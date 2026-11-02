@@ -1,4 +1,5 @@
 import {
+<<<<<<< HEAD
   USE_CASES, TRANSACTION_PROFILE, CUSTOM_SERVERS_KEY, SELECTED_SERVER_KEY,
   PAGE_COPY, RESOURCE_COPY, RESOURCE_FIELDS
 } from './js/config.mjs';
@@ -6,6 +7,15 @@ import {
   escapeHtml, truncate, normalizeServerUrl, profilesOf, identifyUseCase,
   resourceDisplay, formatDate, narrativeText, getCodingDisplay
 } from './js/utils.mjs';
+=======
+  USE_CASES, CUSTOM_SERVERS_KEY, SELECTED_SERVER_KEY,
+  PAGE_COPY, RESOURCE_COPY, RESOURCE_FIELDS
+} from './js/config.mjs?v=1.9.1';
+import {
+  escapeHtml, truncate, normalizeServerUrl, profilesOf, identifyUseCase,
+  resourceDisplay, formatDate, narrativeText, getCodingDisplay, formatUseCaseLabel
+} from './js/utils.mjs?v=1.9.1';
+>>>>>>> origin/master
 import { requestJson } from './js/api.mjs';
 import { buildManagedResource } from './js/resourceFactory.mjs';
 
@@ -21,9 +31,22 @@ const state = {
   resource: null,
   fileName: null,
   validation: null,
+<<<<<<< HEAD
   binaryPreviewUrl: null,
   activeBinaryDownload: null,
   serverRevision: 0,
+=======
+  iti65Transaction: null,
+  iti65PreparedKey: null,
+  iti65TransactionStale: false,
+  iti65TransactionValidation: null,
+  iti65Debounce: null,
+  binaryPreviewUrl: null,
+  activeBinaryDownload: null,
+  serverRevision: 0,
+  explorerNextUrl: null,
+  explorerRevision: 0,
+>>>>>>> origin/master
   debounce: null
 };
 
@@ -33,6 +56,7 @@ const el = Object.fromEntries([
   'syntaxMessage', 'resourcePreview', 'downloadButton', 'validateButton', 'validationResult',
   'binaryPreviewDialog', 'binaryPreviewFrame', 'binaryPreviewTitle', 'binaryDownloadButton',
   'resourceUrlInput', 'loadUrlButton',
+<<<<<<< HEAD
   'sourceIdInput', 'tokenInput', 'iti65ResourceSummary', 'iti65ValidateButton', 'iti65SendButton',
   'iti65Result', 'patientIdentifierInput', 'retrieveUrlInput', 'iti67Button', 'iti68Button',
   'queryStatus', 'queryResult', 'refreshLogsButton', 'logsList', 'toast',
@@ -43,6 +67,21 @@ const el = Object.fromEntries([
   'guidedNpsFields', 'guidedNotifFields', 'guidedOncoFields', 'guidedPdfField', 'guidedPdfInput', 'guidedPdfMeta', 'previewGuidedPdfButton', 'generateGuidedButton',
   'npsDiagnosisCode', 'npsDiagnosisDisplay', 'npsDiagnosisDetail', 'npsAllergyCode', 'npsAllergyDisplay', 'npsAllergyDetail', 'npsMedicationCode', 'npsMedicationDisplay', 'npsMedicationDetail',
   'notifDiagnosisCode', 'notifDiagnosisDisplay', 'notifDiagnosisDetail', 'notifSymptoms', 'oncoDiagnosisCode', 'oncoDiagnosisDisplay', 'oncoStage', 'oncoTumorSite', 'oncoTreatment',
+=======
+  'iti65ResourceSummary', 'prepareIti65Button', 'iti65TransactionEditor',
+  'iti65TransactionMeta', 'iti65TransactionSyntax', 'iti65TransactionMessage', 'formatIti65Button', 'downloadIti65Button',
+  'iti65ValidateButton', 'iti65SendButton', 'iti65TransactionValidation', 'iti65Result',
+  'patientIdentifierTypeSelect', 'patientIdentifierAdvanced', 'patientIdentifierSystemInput', 'patientIdentifierInput', 'documentTypeFilter', 'documentStatusFilter', 'retrieveUrlInput', 'iti67Button', 'iti68Button',
+  'queryStatus', 'queryResult', 'refreshLogsButton', 'logsList', 'toast',
+  'serverNameInput', 'serverUrlConfigInput', 'addServerButton', 'serverTokenInput', 'serverList',
+  'explorerServerSelect', 'explorerResourceType', 'explorerGlobalToggle', 'explorerSearchButton', 'explorerNextButton', 'explorerHelp', 'explorerResult',
+  'refreshResourcesButton', 'resourceListTitle', 'resourceListMeta', 'managedResourceList', 'resourceFormTitle', 'managedResourceForm', 'managedResourceFields',
+  'refreshGuidedContextButton', 'guidedCaseForm', 'guidedUseCase', 'guidedPatientMode', 'guidedPatient', 'guidedExistingPatientField', 'guidedNewPatientFields', 'guidedPractitioner', 'guidedOrganization', 'guidedDate', 'guidedReason',
+  'guidedPatientIdentifier', 'guidedPatientIdentifierSystem', 'guidedPatientGiven', 'guidedPatientFamily', 'guidedPatientBirthDate', 'guidedPatientGender', 'searchGuidedPatientButton', 'guidedPatientSearchMeta', 'guidedSelectedPatient', 'guidedPatientResults',
+  'guidedNpsFields', 'guidedLabFields', 'guidedNotifFields', 'guidedOncoFields', 'guidedPdfField', 'guidedPdfInput', 'guidedPdfMeta', 'previewGuidedPdfButton', 'generateGuidedButton',
+  'npsDiagnosisCode', 'npsDiagnosisDisplay', 'npsDiagnosisDetail', 'npsAllergyCode', 'npsAllergyDisplay', 'npsAllergyDetail', 'npsMedicationCode', 'npsMedicationDisplay', 'npsMedicationDetail',
+  'labTestCode', 'labTestDisplay', 'labResultText', 'notifDiagnosisCode', 'notifDiagnosisDisplay', 'notifDiagnosisDetail', 'notifSymptoms', 'oncoDiagnosisCode', 'oncoDiagnosisDisplay', 'oncoStage', 'oncoTumorSite', 'oncoTreatment',
+>>>>>>> origin/master
   'newPatientGiven', 'newPatientFamily', 'newPatientSecondFamily', 'newPatientIdentifierValue', 'newPatientIdentifierType', 'newPatientIdentifierSystem', 'newPatientGender', 'newPatientBirthDate', 'newPatientPhone', 'newPatientEmail'
 ].map(id => [id, document.getElementById(id)]));
 
@@ -58,7 +97,11 @@ function selectedServer() {
 }
 
 function serverRequest(extra = {}) {
+<<<<<<< HEAD
   return { serverUrl: selectedServer()?.url, token: el.tokenInput?.value || '', ...extra };
+=======
+  return { serverUrl: selectedServer()?.url, token: el.serverTokenInput?.value || '', ...extra };
+>>>>>>> origin/master
 }
 
 function serverContext() {
@@ -88,7 +131,19 @@ function renderServerList() {
     return;
   }
   el.serverList.className = 'server-list';
+<<<<<<< HEAD
   el.serverList.innerHTML = state.servers.map(server => `<article class="server-item${server.url === state.selectedServerUrl ? ' active' : ''}"><div><h4>${escapeHtml(server.name)} <span class="server-badge">${server.official ? 'Oficial' : 'Personalizado'}</span></h4><p>${escapeHtml(server.url)}</p></div><div class="server-actions"><button class="button ${server.url === state.selectedServerUrl ? 'ghost' : 'secondary'} compact select-server" data-server-id="${escapeHtml(server.id)}">${server.url === state.selectedServerUrl ? 'Activo' : 'Seleccionar'}</button>${server.official ? '' : `<button class="button ghost compact danger delete-server" data-server-id="${escapeHtml(server.id)}">Eliminar</button>`}</div></article>`).join('');
+=======
+  el.serverList.innerHTML = state.servers.map(server => {
+    const role = server.role || 'general';
+    const roleName = { general: 'FHIR general', registry: 'Registro / índices', repository: 'Repositorio documental' }[role] || 'FHIR general';
+    const active = role === 'general' && server.url === state.selectedServerUrl;
+    const action = role === 'general'
+      ? `<button class="button ${active ? 'ghost' : 'secondary'} compact select-server" data-server-id="${escapeHtml(server.id)}">${active ? 'Activo' : 'Seleccionar'}</button>`
+      : `<button class="button secondary compact explore-server" data-server-id="${escapeHtml(server.id)}">Explorar</button>`;
+    return `<article class="server-item${active ? ' active' : ''}"><div><h4>${escapeHtml(server.name)} <span class="server-badge">${server.official ? 'Oficial' : 'Personalizado'}</span> <span class="server-badge">${roleName}</span></h4><p>${escapeHtml(server.url)}</p></div><div class="server-actions">${action}${server.official ? '' : `<button class="button ghost compact danger delete-server" data-server-id="${escapeHtml(server.id)}">Eliminar</button>`}</div></article>`;
+  }).join('');
+>>>>>>> origin/master
 }
 
 function resetServerDependentViews(server) {
@@ -96,6 +151,10 @@ function resetServerDependentViews(server) {
   state.catalogTotals = { Organization: 0, Patient: 0, Practitioner: 0 };
   state.patientSearchResults = [];
   state.validation = null;
+<<<<<<< HEAD
+=======
+  state.iti65TransactionValidation = null;
+>>>>>>> origin/master
   renderResourceCounts();
 
   el.resourceListMeta.textContent = `Servidor activo: ${server.name}`;
@@ -110,11 +169,25 @@ function resetServerDependentViews(server) {
   el.queryStatus.className = 'badge neutral';
   el.queryStatus.textContent = 'Sin consulta';
   el.queryResult.className = 'empty-state';
+<<<<<<< HEAD
   el.queryResult.textContent = 'El servidor cambió. Ejecuta nuevamente ITI-67 o ITI-68 en el sandbox activo.';
   el.retrieveUrlInput.value = '';
 
   el.iti65Result.className = 'empty-state';
   el.iti65Result.textContent = 'El servidor cambió. Todavía no se ha ejecutado ITI-65 en el sandbox activo.';
+=======
+  el.queryResult.textContent = 'La selección del sandbox cambió. Las consultas documentales anteriores se descartaron.';
+  state.explorerRevision += 1;
+  state.explorerNextUrl = null;
+  el.explorerNextButton.disabled = true;
+  el.explorerResult.className = 'empty-state compact-empty';
+  el.explorerResult.textContent = 'El servidor FHIR activo cambió. Ejecuta una nueva consulta documental.';
+  el.retrieveUrlInput.value = '';
+
+  el.iti65Result.className = 'empty-state';
+  el.iti65Result.textContent = 'Todavía no se ha publicado el documento cargado.';
+  resetIti65TransactionValidation('El documento se conserva; vuelve a ejecutar <strong>$validate</strong> si fue modificado.');
+>>>>>>> origin/master
   el.validationResult.className = 'validation-content empty-state compact-empty';
   el.validationResult.innerHTML = `Servidor cambiado a <strong>${escapeHtml(server.name)}</strong>. El JSON permanece en el editor; ejecuta <strong>$validate</strong> nuevamente contra este servidor.`;
   renderIti65Selection();
@@ -133,7 +206,10 @@ function selectServer(url) {
   state.selectedServerUrl = server.url;
   if (changed) {
     state.serverRevision += 1;
+<<<<<<< HEAD
     el.tokenInput.value = '';
+=======
+>>>>>>> origin/master
     el.serverTokenInput.value = '';
     resetServerDependentViews(server);
   }
@@ -150,11 +226,20 @@ function selectServer(url) {
 function loadServers(config) {
   const official = (config.fhirServers || [{ id: 'default', name: 'Sandbox FHIR principal', url: config.hapiFhirUrl }]).map(item => ({ ...item, official: true }));
   const custom = readCustomServers().map(item => ({ ...item, official: false }));
+<<<<<<< HEAD
   state.servers = [...official, ...custom].filter((item, index, list) => list.findIndex(candidate => candidate.url === item.url) === index);
   el.serverSelect.innerHTML = state.servers.map(item => `<option value="${escapeHtml(item.url)}">${escapeHtml(item.name)}</option>`).join('');
   const saved = localStorage.getItem(SELECTED_SERVER_KEY);
   const defaultServerUrl = config.defaultFhirServerUrl || config.hapiFhirUrl;
   selectServer(state.servers.some(item => item.url === saved) ? saved : defaultServerUrl);
+=======
+  state.servers = [...official, ...custom.map(item => ({ ...item, role: 'general' }))].filter((item, index, list) => list.findIndex(candidate => candidate.url === item.url) === index);
+  el.serverSelect.innerHTML = state.servers.filter(item => (item.role || 'general') === 'general').map(item => `<option value="${escapeHtml(item.url)}">${escapeHtml(item.name)}</option>`).join('');
+  const saved = localStorage.getItem(SELECTED_SERVER_KEY);
+  const defaultServerUrl = config.defaultFhirServerUrl || config.hapiFhirUrl;
+  selectServer(state.servers.some(item => item.url === saved && (item.role || 'general') === 'general') ? saved : defaultServerUrl);
+  initializeExplorerServers();
+>>>>>>> origin/master
 }
 
 function addCustomServer() {
@@ -168,7 +253,11 @@ function addCustomServer() {
     selectServer(existing.url);
     return showToast('Ese servidor ya estaba registrado; quedó seleccionado.');
   }
+<<<<<<< HEAD
   state.servers.push({ id: `custom-${Date.now()}`, name, url, official: false });
+=======
+  state.servers.push({ id: `custom-${Date.now()}`, name, url, role: 'general', official: false });
+>>>>>>> origin/master
   saveCustomServers();
   el.serverSelect.insertAdjacentHTML('beforeend', `<option value="${escapeHtml(url)}">${escapeHtml(name)}</option>`);
   el.serverNameInput.value = '';
@@ -180,11 +269,20 @@ function addCustomServer() {
 function handleServerListAction(event) {
   const selectButton = event.target.closest('.select-server');
   const deleteButton = event.target.closest('.delete-server');
+<<<<<<< HEAD
   const target = selectButton || deleteButton;
+=======
+  const explorerButton = event.target.closest('.explore-server');
+  const target = selectButton || deleteButton || explorerButton;
+>>>>>>> origin/master
   if (!target) return;
   const server = state.servers.find(item => item.id === target.dataset.serverId);
   if (!server) return;
   if (selectButton) return selectServer(server.url);
+<<<<<<< HEAD
+=======
+  if (explorerButton) { el.explorerServerSelect.value = server.id; updateExplorerType(); showPage('queries'); return; }
+>>>>>>> origin/master
   state.servers = state.servers.filter(item => item.id !== server.id);
   saveCustomServers();
   el.serverSelect.querySelector(`option[value="${CSS.escape(server.url)}"]`)?.remove();
@@ -342,7 +440,11 @@ function renderGuidedPatientResults() {
   const records = state.patientSearchResults;
   el.guidedPatientSearchMeta.textContent = `${records.length} candidato(s) devuelto(s) por ${selectedServer()?.name || 'el servidor activo'}.`;
   if (!records.length) {
+<<<<<<< HEAD
     el.guidedPatientResults.innerHTML = '<div class="notice info">No se encontraron coincidencias. Puedes ampliar los criterios o cambiar el origen a “Crear dentro de ITI-65”.</div>';
+=======
+    el.guidedPatientResults.innerHTML = '<div class="notice info">No se encontraron coincidencias. Puedes ampliar los criterios o incluir un PatientDO nuevo dentro del documento.</div>';
+>>>>>>> origin/master
     return;
   }
   el.guidedPatientResults.innerHTML = records.map(patient => `<article class="patient-candidate${patient.id === el.guidedPatient.value ? ' selected' : ''}"><div><h4>${escapeHtml(resourceDisplay(patient))}</h4><p>${escapeHtml(patientDemographicSummary(patient))}</p></div><button class="button secondary compact select-guided-patient" type="button" data-patient-id="${escapeHtml(patient.id || '')}" ${patient.id ? '' : 'disabled'}>Seleccionar</button></article>`).join('');
@@ -396,6 +498,10 @@ function handleGuidedPatientResults(event) {
 function showGuidedCaseFields() {
   const useCase = el.guidedUseCase.value;
   el.guidedNpsFields.hidden = useCase !== 'nps';
+<<<<<<< HEAD
+=======
+  el.guidedLabFields.hidden = useCase !== 'lab';
+>>>>>>> origin/master
   el.guidedNotifFields.hidden = useCase !== 'notif';
   el.guidedOncoFields.hidden = useCase !== 'onco';
   el.guidedPdfField.hidden = useCase === 'nps';
@@ -435,9 +541,17 @@ async function generateGuidedDocument(event) {
     encounterDate: el.guidedDate.value ? new Date(el.guidedDate.value).toISOString() : undefined, encounterReason: el.guidedReason.value,
     diagnosis: useCase === 'nps' ? { code: el.npsDiagnosisCode.value, display: el.npsDiagnosisDisplay.value, detail: el.npsDiagnosisDetail.value }
       : useCase === 'notif' ? { code: el.notifDiagnosisCode.value, display: el.notifDiagnosisDisplay.value, detail: el.notifDiagnosisDetail.value }
+<<<<<<< HEAD
         : { code: el.oncoDiagnosisCode.value, display: el.oncoDiagnosisDisplay.value, detail: [el.oncoStage.value, el.oncoTumorSite.value].filter(Boolean).join(' · ') },
     allergy: { code: el.npsAllergyCode.value, display: el.npsAllergyDisplay.value, detail: el.npsAllergyDetail.value },
     medication: { code: el.npsMedicationCode.value, display: el.npsMedicationDisplay.value, detail: el.npsMedicationDetail.value },
+=======
+        : useCase === 'onco' ? { code: el.oncoDiagnosisCode.value, display: el.oncoDiagnosisDisplay.value, detail: [el.oncoStage.value, el.oncoTumorSite.value].filter(Boolean).join(' · ') }
+          : {},
+    allergy: { code: el.npsAllergyCode.value, display: el.npsAllergyDisplay.value, detail: el.npsAllergyDetail.value },
+    medication: { code: el.npsMedicationCode.value, display: el.npsMedicationDisplay.value, detail: el.npsMedicationDetail.value },
+    labTestCode: el.labTestCode.value, labTestDisplay: el.labTestDisplay.value, labResultText: el.labResultText.value,
+>>>>>>> origin/master
     symptoms: el.notifSymptoms.value, stage: el.oncoStage.value, tumorSite: el.oncoTumorSite.value, treatment: el.oncoTreatment.value, pdf: state.guidedPdf
   };
   el.generateGuidedButton.disabled = true; el.generateGuidedButton.textContent = 'Generando…';
@@ -465,7 +579,14 @@ function showPage(pageName) {
   el.pageTitle.textContent = copy[0];
   el.pageDescription.textContent = copy[1];
   document.querySelector('.sidebar')?.classList.remove('open');
+<<<<<<< HEAD
   if (pageName === 'iti65') renderIti65Selection();
+=======
+  if (pageName === 'iti65') {
+    renderIti65Selection();
+    if (isIti65Eligible(state.resource) && (!state.iti65Transaction || state.iti65TransactionStale)) prepareIti65Transaction();
+  }
+>>>>>>> origin/master
   if (pageName === 'activity') loadLogs();
   if (pageName === 'resources' && state.servers.length) loadManagedResources();
   if (pageName === 'guided' && state.servers.length && (!state.catalogs.Practitioner.length || !state.catalogs.Organization.length)) loadGuidedContext();
@@ -729,7 +850,11 @@ function renderBundle(bundle) {
   const entryRows = entries.slice(0, 60).map((entry, index) => `<tr><td>${index + 1}</td><td><code>${escapeHtml(entry?.resource?.resourceType || '—')}</code></td><td>${escapeHtml(resourceDisplay(entry?.resource))}</td><td><code>${escapeHtml(entry.fullUrl || '—')}</code></td></tr>`).join('');
   return `
     <div class="preview-section"><h4>Resumen del Bundle</h4><div class="summary-grid">
+<<<<<<< HEAD
       ${summaryItem('Tipo', bundle.type)}${summaryItem('Caso de uso', useCase ? `Track ${useCase.track} · ${useCase.label}` : 'No identificado')}
+=======
+      ${summaryItem('Tipo', bundle.type)}${summaryItem('Caso de uso', formatUseCaseLabel(useCase))}
+>>>>>>> origin/master
       ${summaryItem('Entradas', entries.length)}${summaryItem('Fecha', formatDate(bundle.timestamp))}
       ${summaryItem('Título', composition?.title || 'N/D')}${summaryItem('Paciente', patient ? resourceDisplay(patient) : 'N/D')}
     </div></div>
@@ -754,7 +879,11 @@ function renderResourcePreview() {
   const useCase = identifyUseCase(resource);
   el.resourcePreview.className = 'resource-preview';
   el.resourcePreview.innerHTML = `
+<<<<<<< HEAD
     <div class="resource-hero"><div class="resource-type">${escapeHtml(resource.resourceType)}</div><p>ID: ${escapeHtml(resource.id || 'sin id')}${useCase ? ` · Track ${useCase.track}: ${escapeHtml(useCase.label)}` : ''}</p></div>
+=======
+    <div class="resource-hero"><div class="resource-type">${escapeHtml(resource.resourceType)}</div><p>ID: ${escapeHtml(resource.id || 'sin id')}${useCase ? ` · ${escapeHtml(formatUseCaseLabel(useCase))}` : ''}</p></div>
+>>>>>>> origin/master
     <div class="profile-list">${profiles.length ? profiles.map(profile => `<div class="profile-chip" title="${escapeHtml(profile)}"><span>Perfil FHIR</span><code>${escapeHtml(profile)}</code></div>`).join('') : '<div class="profile-chip"><span>Perfil FHIR</span><code>Sin meta.profile declarado</code></div>'}</div>
     ${resource.resourceType === 'Bundle' ? renderBundle(resource) : renderKnownResource(resource)}
     ${renderBinaryDocuments(resource)}
@@ -840,7 +969,11 @@ async function validateCurrentResource({ openEditor = false } = {}) {
   const resource = parseEditor({ silent: true });
   if (!resource) return null;
   const context = serverContext();
+<<<<<<< HEAD
   const buttons = [el.validateButton, el.iti65ValidateButton];
+=======
+  const buttons = [el.validateButton];
+>>>>>>> origin/master
   buttons.forEach(button => { button.disabled = true; button.dataset.original = button.textContent; button.textContent = 'Validando…'; });
   el.validationResult.className = 'validation-content empty-state compact-empty';
   el.validationResult.textContent = `Enviando ${resource.resourceType} al servidor FHIR…`;
@@ -870,16 +1003,187 @@ async function validateCurrentResource({ openEditor = false } = {}) {
 }
 
 function isIti65Eligible(resource) {
+<<<<<<< HEAD
   if (resource?.resourceType !== 'Bundle') return false;
   if (resource.type === 'transaction') return profilesOf(resource).includes(TRANSACTION_PROFILE);
   return resource.type === 'document' && Boolean(identifyUseCase(resource));
+=======
+  return resource?.resourceType === 'Bundle' && resource.type === 'document' && Boolean(identifyUseCase(resource));
+}
+
+function iti65PreparationKey(resource = state.resource) {
+  return resource ? JSON.stringify(resource) : null;
+}
+
+function resetIti65TransactionValidation(message = 'Ejecuta <strong>$validate</strong> sobre el Bundle documental antes de publicarlo.') {
+  state.iti65TransactionValidation = null;
+  el.iti65TransactionValidation.className = 'validation-content empty-state compact-empty';
+  el.iti65TransactionValidation.innerHTML = message;
+}
+
+function setIti65TransactionSyntax(kind, label, message = '') {
+  el.iti65TransactionSyntax.className = `badge ${kind}`;
+  el.iti65TransactionSyntax.textContent = label;
+  el.iti65TransactionMessage.className = `inline-message${kind === 'error' ? ' error' : ''}`;
+  el.iti65TransactionMessage.textContent = message;
+}
+
+function updateIti65Actions() {
+  const ready = Boolean(state.iti65Transaction) && !state.iti65TransactionStale;
+  el.formatIti65Button.disabled = !state.iti65Transaction;
+  el.downloadIti65Button.disabled = !state.iti65Transaction;
+  el.iti65ValidateButton.disabled = !ready;
+  el.iti65SendButton.disabled = !ready;
+}
+
+function parseIti65Transaction({ silent = false, resetValidation = true } = {}) {
+  const text = el.iti65TransactionEditor.value.trim();
+  if (resetValidation) resetIti65TransactionValidation();
+  if (!text) {
+    state.iti65Transaction = null;
+    setIti65TransactionSyntax('neutral', 'Sin cargar');
+    el.iti65TransactionMeta.textContent = 'Carga el documento desde el editor principal';
+    updateIti65Actions();
+    return null;
+  }
+  try {
+    const transaction = JSON.parse(text);
+    if (transaction?.resourceType !== 'Bundle' || transaction.type !== 'transaction' || !Array.isArray(transaction.entry) || transaction.entry.length !== 4 || !['List', 'DocumentReference', 'Bundle', 'Patient'].every(type => transaction.entry.some(entry => entry.resource?.resourceType === type))) {
+      throw new Error('Se requiere un Bundle.type=transaction con List, DocumentReference, Bundle clínico y Patient.');
+    }
+    state.iti65Transaction = transaction;
+    const size = new Blob([text]).size;
+    setIti65TransactionSyntax(
+      state.iti65TransactionStale ? 'warning' : 'success',
+      state.iti65TransactionStale ? 'Reconstruir' : 'JSON válido',
+      state.iti65TransactionStale
+        ? 'El documento de origen cambió. Vuelve a cargarlo antes de publicarlo.'
+        : `${transaction.entry?.length || 0} entradas · ${(size / 1024).toFixed(1)} KB`
+    );
+    el.iti65TransactionMeta.textContent = `Bundle/${transaction.id || 'sin-id'} · type=transaction · ${transaction.entry.length} entradas`; 
+    updateIti65Actions();
+    return transaction;
+  } catch (error) {
+    state.iti65Transaction = null;
+    setIti65TransactionSyntax('error', 'Revisar JSON', error.message);
+    el.iti65TransactionMeta.textContent = 'El Bundle documental contiene errores';
+    updateIti65Actions();
+    if (!silent) showToast(error.message, true);
+    return null;
+  }
+}
+
+function markIti65TransactionStale() {
+  if (state.resource?.type !== 'document') return;
+  if (!el.iti65TransactionEditor.value.trim()) return;
+  state.iti65TransactionStale = true;
+  parseIti65Transaction({ silent: true });
+}
+
+async function prepareIti65Transaction() {
+  const resource = state.resource;
+  if (!isIti65Eligible(resource)) return showToast('Carga un Bundle clínico de los cuatro tipos admitidos.', true);
+  const button = el.prepareIti65Button;
+  button.disabled = true;
+  const original = button.textContent;
+  button.textContent = 'Cargando…';
+  setIti65TransactionSyntax('neutral', 'Revisando');
+  el.iti65TransactionMessage.textContent = 'Generando transacción localmente; todavía no se ha enviado nada al mediador.';
+  try {
+    const payload = await requestJson('/api/documents/transaction/prepare', {
+      method: 'POST',
+      body: JSON.stringify({ resource })
+    });
+    const result = payload.result;
+    state.iti65PreparedKey = iti65PreparationKey(resource);
+    state.iti65TransactionStale = false;
+    el.iti65TransactionEditor.value = JSON.stringify(result.transaction, null, 2);
+    parseIti65Transaction({ silent: true });
+    el.iti65TransactionMeta.textContent = `Bundle.type=transaction · ${result.transaction.entry.length} entradas · ${result.useCaseLabel || 'ITI-65'}`;
+    showToast('Transacción ITI-65 generada. Revisa las cuatro entradas antes de publicar.');
+  } catch (error) {
+    state.iti65Transaction = null;
+    state.iti65PreparedKey = null;
+    state.iti65TransactionStale = false;
+    el.iti65TransactionEditor.value = '';
+    setIti65TransactionSyntax('error', 'No construido', error.message);
+    el.iti65TransactionMeta.textContent = 'Corrige la configuración o el documento de origen';
+    updateIti65Actions();
+    showToast(error.message, true);
+  } finally {
+    button.textContent = original;
+    renderIti65Selection();
+  }
+}
+
+function formatIti65Transaction() {
+  const transaction = parseIti65Transaction();
+  if (!transaction) return;
+  el.iti65TransactionEditor.value = JSON.stringify(transaction, null, 2);
+  parseIti65Transaction({ silent: true });
+}
+
+function downloadIti65Transaction() {
+  const transaction = parseIti65Transaction();
+  if (!transaction) return;
+  const blob = new Blob([`${JSON.stringify(transaction, null, 2)}\n`], { type: 'application/fhir+json' });
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = `iti65-transaction-${transaction.id || 'sin-id'}.json`;
+  link.click();
+  URL.revokeObjectURL(link.href);
+}
+
+async function validateIti65Transaction() {
+  const transaction = parseIti65Transaction();
+  if (!transaction || state.iti65TransactionStale) return showToast('Vuelve a cargar o corrige el Bundle documental antes de validarlo.', true);
+  const context = serverContext();
+  const button = el.iti65ValidateButton;
+  button.disabled = true;
+  const original = button.textContent;
+  button.textContent = 'Validando…';
+  el.iti65TransactionValidation.className = 'validation-content empty-state compact-empty';
+  el.iti65TransactionValidation.textContent = 'Validando el Bundle documental contra el servidor configurado para $validate…';
+  try {
+    const payload = await requestJson('/api/fhir/validate', {
+      method: 'POST', body: JSON.stringify(serverRequest({ resource: transaction, serverUrl: context.serverUrl }))
+    });
+    if (!isCurrentServerContext(context)) return null;
+    state.iti65TransactionValidation = payload.result;
+    el.iti65TransactionValidation.className = 'validation-content';
+    el.iti65TransactionValidation.innerHTML = renderOperationOutcomeHtml(payload.result);
+    showToast(payload.result.valid ? 'Bundle documental validado sin errores bloqueantes.' : 'El documento contiene errores que deben corregirse.', !payload.result.valid);
+    return payload.result;
+  } catch (error) {
+    if (!isCurrentServerContext(context)) return null;
+    el.iti65TransactionValidation.className = 'validation-content';
+    el.iti65TransactionValidation.innerHTML = error.details?.resourceType === 'OperationOutcome'
+      ? renderOperationOutcomeHtml({ outcome: error.details, issues: error.details.issue || [] })
+      : `<div class="notice warning"><strong>No fue posible validar el Bundle documental.</strong><br>${escapeHtml(error.message)}</div>`;
+    showToast(error.message, true);
+    return null;
+  } finally {
+    button.textContent = original;
+    updateIti65Actions();
+  }
+>>>>>>> origin/master
 }
 
 function renderIti65Selection() {
   const resource = state.resource;
   const eligible = isIti65Eligible(resource);
+<<<<<<< HEAD
   el.iti65SendButton.disabled = !eligible;
   el.iti65ValidateButton.disabled = !resource;
+=======
+  el.prepareIti65Button.disabled = !eligible;
+  el.prepareIti65Button.textContent = 'Generar transacción ITI-65';
+  if (state.iti65PreparedKey && state.iti65PreparedKey !== iti65PreparationKey(resource)) {
+    state.iti65TransactionStale = true;
+    parseIti65Transaction({ silent: true });
+  }
+  updateIti65Actions();
+>>>>>>> origin/master
   if (!resource) {
     el.iti65ResourceSummary.className = 'resource-selection empty-state compact-empty';
     el.iti65ResourceSummary.textContent = 'Todavía no hay un recurso válido en el editor.';
@@ -887,6 +1191,7 @@ function renderIti65Selection() {
   }
   const useCase = identifyUseCase(resource);
   const reason = resource.resourceType !== 'Bundle'
+<<<<<<< HEAD
     ? 'El recurso puede validarse, pero ITI-65 requiere un Bundle.'
     : resource.type === 'transaction' && !profilesOf(resource).includes(TRANSACTION_PROFILE)
       ? 'El Bundle transaction no declara BundleTransaccDO.'
@@ -922,28 +1227,175 @@ async function sendIti65() {
       ${rows ? `<div class="preview-section"><h4>Recursos procesados</h4><table class="data-table"><thead><tr><th>#</th><th>Estado</th><th>Location</th></tr></thead><tbody>${rows}</tbody></table></div>` : ''}
       <details class="preview-section"><summary>Ver respuesta FHIR</summary><pre class="raw-response">${escapeHtml(JSON.stringify(result.response, null, 2))}</pre></details>`;
     showToast('Documento publicado mediante ITI-65.');
+=======
+    ? 'La publicación requiere un Bundle.'
+    : resource.type === 'document' && !useCase
+      ? 'El tipo documental debe identificarse por perfil nacional o código LOINC.'
+      : resource.type !== 'document'
+        ? 'La publicación requiere Bundle.type=document.' : '';
+  el.iti65ResourceSummary.className = 'resource-selection';
+  el.iti65ResourceSummary.innerHTML = `<div class="selection-ok"><h4>${escapeHtml(resource.resourceType)}${resource.id ? `/${escapeHtml(resource.id)}` : ''}</h4><p>${eligible ? escapeHtml(formatUseCaseLabel(useCase)) : escapeHtml(reason)}</p><code>${escapeHtml(profilesOf(resource)[0] || 'Sin meta.profile')}</code></div>`;
+}
+
+async function sendIti65() {
+  const resource = parseIti65Transaction({ silent: true, resetValidation: false });
+  if (!resource || state.iti65TransactionStale) return showToast('Carga o corrige el Bundle documental antes de publicarlo.', true);
+  const context = serverContext();
+  el.iti65SendButton.disabled = true; el.iti65SendButton.textContent = 'Publicando…';
+  el.iti65Result.className = 'empty-state'; el.iti65Result.textContent = 'Enviando el Bundle de transacción ITI-65 a OpenHIM…';
+  try {
+    const payload = await requestJson('/api/documents/transaction/publish', {
+      method: 'POST',
+      body: JSON.stringify({ transaction: resource })
+    });
+    if (!isCurrentServerContext(context)) return;
+    const result = payload.result;
+    el.iti65Result.className = '';
+    el.iti65Result.innerHTML = `<div class="result-success"><h4>Publicación procesada · HTTP ${escapeHtml(result.status)}</h4><p>El mediador recibió la transacción ITI-65.</p></div>
+      <details class="preview-section" open><summary>Ver respuesta del mediador</summary><pre class="raw-response">${escapeHtml(JSON.stringify(result.response, null, 2))}</pre></details>`;
+    showToast('Documento publicado mediante el mediador nacional.');
+>>>>>>> origin/master
   } catch (error) {
     if (!isCurrentServerContext(context)) return;
     el.iti65Result.className = '';
     el.iti65Result.innerHTML = error.details?.resourceType === 'OperationOutcome'
+<<<<<<< HEAD
       ? `<div class="notice warning"><strong>ITI-65 rechazada por el servidor.</strong></div>${renderOperationOutcomeHtml({ issues: error.details.issue || [] })}`
       : `<div class="notice warning"><strong>No se completó ITI-65.</strong><br>${escapeHtml(error.message)}</div>`;
     showToast(error.message, true);
   } finally {
     el.iti65SendButton.textContent = 'Ejecutar ITI-65';
+=======
+      ? `<div class="notice warning"><strong>Publicación rechazada por el mediador.</strong></div>${renderOperationOutcomeHtml({ issues: error.details.issue || [] })}`
+      : `<div class="notice warning"><strong>No se completó la publicación.</strong><br>${escapeHtml(error.message)}</div>`;
+    showToast(error.message, true);
+  } finally {
+    el.iti65SendButton.textContent = 'Publicar documento';
+>>>>>>> origin/master
     renderIti65Selection();
   }
 }
 
+<<<<<<< HEAD
+=======
+function initializeIdentifierTypes() {
+  const systems = Array.isArray(state.config?.identifierSystems) ? state.config.identifierSystems : [];
+  const customOption = '<option value="custom">Otro (URI personalizada)</option>';
+  el.patientIdentifierTypeSelect.innerHTML = systems.map(item => `<option value="${escapeHtml(item.code)}">${escapeHtml(item.name)}</option>`).join('') + customOption;
+  el.patientIdentifierTypeSelect.value = systems.some(item => item.code === 'cedula') ? 'cedula' : (systems[0]?.code || 'custom');
+  updateIdentifierSystem();
+}
+function updateIdentifierSystem() {
+  const item = state.config?.identifierSystems?.find(v => v.code === el.patientIdentifierTypeSelect.value);
+  if (item?.system) {
+    el.patientIdentifierSystemInput.value = item.system;
+  } else {
+    el.patientIdentifierSystemInput.value = '';
+    el.patientIdentifierAdvanced.open = true;
+  }
+}
+function initializeExplorerServers() {
+  const servers = state.servers.filter(item => item.official && ['registry', 'repository'].includes(item.role));
+  el.explorerServerSelect.innerHTML = servers.map(item => `<option value="${escapeHtml(item.id)}">${escapeHtml(item.name)} · ${item.role === 'registry' ? 'Índice' : 'Repositorio'}</option>`).join('');
+  if (servers.length) el.explorerServerSelect.value = servers.find(s => s.role === 'registry')?.id || servers[0].id;
+  el.explorerSearchButton.disabled = !servers.length;
+  el.explorerNextButton.disabled = true;
+  el.explorerGlobalToggle.disabled = !state.config?.documentExplorer?.allowGlobal;
+  updateExplorerType();
+}
+function updateExplorerType() {
+  const server = state.servers.find(item => item.id === el.explorerServerSelect.value);
+  const registry = server?.role === 'registry';
+  for (const option of el.explorerResourceType.options) {
+    option.disabled = registry && option.value !== 'DocumentReference';
+  }
+  if (registry) el.explorerResourceType.value = 'DocumentReference';
+  const inventoryOn = Boolean(state.config?.documentExplorer?.allowGlobal);
+  el.explorerHelp.textContent = `${registry ? 'Índice documental · DocumentReference.' : 'Repositorio documental · consulta según capacidades de este servidor.'} ${inventoryOn ? 'El inventario global está habilitado para este entorno de laboratorio.' : 'Inventario global deshabilitado: busca DocumentReference por paciente.'} El listado de Bundles o Binary requiere soporte de búsqueda del repositorio.`;
+  el.explorerGlobalToggle.checked = false;
+  state.explorerNextUrl = null;
+  el.explorerNextButton.disabled = true;
+}
+function renderExplorerResults(result, append = false) {
+  const rows = (result.entries || []).map(resource => {
+    const title = resource.type?.coding?.[0]?.display || resource.type?.text || resource.resourceType;
+    const content = resource.content?.[0]?.attachment?.url || '';
+    const patient = resource.subject?.reference || resource.subject?.identifier?.value || '—';
+    const date = resource.date || resource.meta?.lastUpdated || '—';
+    const id = String(resource.id || '');
+    const canRetrieve = /(?:^|\/)documents\/[a-f0-9]{40}(?:$|[?#])/i.test(content);
+    return `<tr><td><strong>${escapeHtml(title)}</strong><br><code>${escapeHtml(id || 'sin ID')}</code></td><td>${escapeHtml(patient)}</td><td>${escapeHtml(formatDate(date))}</td><td><code>${escapeHtml(content || '—')}</code></td><td>${id ? `<button class="button secondary compact explorer-read" data-id="${escapeHtml(id)}" data-type="${escapeHtml(resource.resourceType)}">Ver recurso</button>` : ''}${canRetrieve ? `<button class="button ghost compact explorer-mediator-retrieve" data-url="${escapeHtml(content)}">ITI-68</button>` : ''}</td></tr>`;
+  }).join('');
+  const previousRows = append ? el.explorerResult.querySelector('tbody')?.innerHTML || '' : '';
+  el.explorerResult.className = '';
+  el.explorerResult.innerHTML = `<div class="validation-summary"><strong>${escapeHtml(result.serverName)} · ${escapeHtml(result.resourceType)}</strong><span>Esta página: ${result.count}${result.total === null ? '' : ` · Total informado: ${result.total}`}</span></div><div class="explorer-scroll"><table class="result-table"><thead><tr><th>Recurso</th><th>Paciente</th><th>Fecha</th><th>URL documental</th><th>Acción</th></tr></thead><tbody>${previousRows}${rows || (previousRows ? '' : '<tr><td colspan="5">No hay resultados para esta consulta.</td></tr>')}</tbody></table></div>`;
+}
+async function searchExplorer(next = false) {
+  const serverId = el.explorerServerSelect.value;
+  if (!serverId) return showToast('Configura un registro o repositorio documental.', true);
+  const global = el.explorerGlobalToggle.checked;
+  const patientSystem = global ? '' : el.patientIdentifierSystemInput.value.trim();
+  const patientValue = global ? '' : el.patientIdentifierInput.value.trim();
+  if (!global && (!patientSystem || !patientValue)) return showToast('Indica el identificador del paciente y su system.', true);
+  const resourceType = el.explorerResourceType.value;
+  if (!global && resourceType !== 'DocumentReference') return showToast('La búsqueda por paciente se realiza mediante DocumentReference. Selecciona ese recurso.', true);
+  const requestedUrl = next ? state.explorerNextUrl : null;
+  if (next && !requestedUrl) return;
+  const rev = ++state.explorerRevision;
+  el.explorerSearchButton.disabled = true;
+  el.explorerNextButton.disabled = true;
+  if (!next) {
+    el.explorerResult.className = 'empty-state compact-empty';
+    el.explorerResult.textContent = 'Consultando el servidor documental…';
+  }
+  try {
+    const payload = await requestJson('/api/documents/explorer/search', { method: 'POST', body: JSON.stringify({ serverId, resourceType, patientSystem, patientValue,
+      type: resourceType === 'DocumentReference' ? el.documentTypeFilter.value : '', status: resourceType === 'DocumentReference' ? el.documentStatusFilter.value : '', nextUrl: requestedUrl }) });
+    if (rev !== state.explorerRevision) return;
+    renderExplorerResults(payload.result, next);
+    state.explorerNextUrl = payload.result.nextUrl;
+    el.explorerNextButton.disabled = !state.explorerNextUrl;
+  } catch(error) {
+    if (rev !== state.explorerRevision) return;
+    el.explorerResult.className = '';
+    el.explorerResult.innerHTML = `<div class="notice warning"><strong>El inventario no pudo consultarse.</strong><br>${escapeHtml(error.message)}</div>`;
+    showToast(error.message, true);
+  } finally { if (rev === state.explorerRevision) el.explorerSearchButton.disabled = false; }
+}
+async function handleExplorerResult(event) {
+  const retrieve = event.target.closest('.explorer-mediator-retrieve');
+  if (retrieve) return retrieveIti68(retrieve.dataset.url);
+  const readButton = event.target.closest('.explorer-read');
+  if (!readButton) return;
+  readButton.disabled = true;
+  try {
+    const payload = await requestJson('/api/documents/explorer/read', { method: 'POST', body: JSON.stringify({ serverId: el.explorerServerSelect.value, resourceType: readButton.dataset.type, id: readButton.dataset.id }) });
+    el.jsonEditor.value = JSON.stringify(payload.result.resource, null, 2);
+    state.fileName = `${readButton.dataset.type}-${readButton.dataset.id}.json`;
+    parseEditor({ silent: true });
+    showPage('editor');
+    showToast('Recurso recuperado y abierto en el editor FHIR.');
+  } catch(error) { showToast(error.message, true); }
+  finally { readButton.disabled = false; }
+}
+
+>>>>>>> origin/master
 function documentType(resource) {
   return getCodingDisplay(resource?.type);
 }
 
+<<<<<<< HEAD
 function renderSearchResult(result, transaction) {
   const bundle = result.bundle;
   const entries = Array.isArray(bundle?.entry) ? bundle.entry : [];
   const resources = entries.map(entry => entry.resource).filter(Boolean);
   const isDocuments = transaction === 'ITI-67';
+=======
+function renderSearchResult(result) {
+  const bundle = result.bundle;
+  const entries = Array.isArray(bundle?.entry) ? bundle.entry : [];
+  const resources = entries.map(entry => entry.resource).filter(Boolean);
+>>>>>>> origin/master
   const rows = resources.map((resource, index) => {
     if (resource.resourceType === 'DocumentReference') {
       const url = resource.content?.[0]?.attachment?.url || '';
@@ -952,12 +1404,18 @@ function renderSearchResult(result, transaction) {
     return `<tr><td>${index + 1}</td><td>${escapeHtml(resource.resourceType)}</td><td>${escapeHtml(resource.subject?.reference || '—')}</td><td>${escapeHtml(formatDate(resource.date))}</td><td><code>${escapeHtml(resource.id || '—')}</code></td><td>—</td></tr>`;
   }).join('');
   el.queryResult.className = '';
+<<<<<<< HEAD
   el.queryResult.innerHTML = `<div class="validation-summary"><strong>${transaction} completada · ${resources.length} resultado(s)</strong><code>${escapeHtml(result.requestUrl)}</code></div>
     <table class="result-table"><thead><tr><th>#</th><th>${isDocuments ? 'Tipo de documento' : 'Recurso'}</th><th>Paciente</th><th>Fecha</th><th>${isDocuments ? 'URL de recuperación' : 'ID'}</th><th>Acción</th></tr></thead><tbody>${rows || '<tr><td colspan="6">No se encontraron resultados.</td></tr>'}</tbody></table>
+=======
+  el.queryResult.innerHTML = `<div class="validation-summary"><strong>Búsqueda completada · ${resources.length} resultado(s)</strong><code>${escapeHtml(result.requestPath || '/DocumentReference')}</code></div>
+    <table class="result-table"><thead><tr><th>#</th><th>Tipo de documento</th><th>Paciente</th><th>Fecha</th><th>URL de recuperación</th><th>Acción</th></tr></thead><tbody>${rows || '<tr><td colspan="6">No se encontraron resultados.</td></tr>'}</tbody></table>
+>>>>>>> origin/master
     <details class="preview-section"><summary>Ver Bundle searchset</summary><pre class="raw-response">${escapeHtml(JSON.stringify(bundle, null, 2))}</pre></details>`;
 }
 
 async function runSearch() {
+<<<<<<< HEAD
   const transaction = 'ITI-67';
   const identifier = el.patientIdentifierInput.value.trim();
   if (!identifier) return showToast('Indica el identificador del paciente.', true);
@@ -973,11 +1431,32 @@ async function runSearch() {
     });
     if (!isCurrentServerContext(context)) return;
     renderSearchResult(payload.result, transaction);
+=======
+  const patientSystem = el.patientIdentifierSystemInput.value.trim();
+  const patientValue = el.patientIdentifierInput.value.trim();
+  if (!patientSystem || !patientValue) { el.patientIdentifierAdvanced.open = true; return showToast('Indica el número de identificación y su system.', true); }
+  const context = serverContext();
+  const button = el.iti67Button;
+  const endpoint = '/api/documents/search';
+  button.disabled = true; const original = button.textContent; button.textContent = 'Consultando…';
+  el.queryStatus.className = 'badge neutral'; el.queryStatus.textContent = 'Consultando';
+  el.queryResult.className = 'empty-state'; el.queryResult.textContent = 'Consultando el índice documental nacional…';
+  try {
+    const payload = await requestJson(endpoint, {
+      method: 'POST', body: JSON.stringify({ patientSystem, patientValue, type: el.documentTypeFilter.value, status: el.documentStatusFilter.value })
+    });
+    if (!isCurrentServerContext(context)) return;
+    renderSearchResult(payload.result);
+>>>>>>> origin/master
     el.queryStatus.className = 'badge success'; el.queryStatus.textContent = `HTTP ${payload.result.status}`;
   } catch (error) {
     if (!isCurrentServerContext(context)) return;
     el.queryResult.className = '';
+<<<<<<< HEAD
     el.queryResult.innerHTML = `<div class="notice warning"><strong>${transaction} no pudo completarse.</strong><br>${escapeHtml(error.message)}</div>`;
+=======
+    el.queryResult.innerHTML = `<div class="notice warning"><strong>La búsqueda no pudo completarse.</strong><br>${escapeHtml(error.message)}</div>`;
+>>>>>>> origin/master
     el.queryStatus.className = 'badge error'; el.queryStatus.textContent = 'Error';
     showToast(error.message, true);
   } finally { button.disabled = false; button.textContent = original; }
@@ -985,6 +1464,7 @@ async function runSearch() {
 
 async function retrieveIti68(value) {
   const retrieveUrl = String(value || el.retrieveUrlInput.value).trim();
+<<<<<<< HEAD
   if (!retrieveUrl) return showToast('Indica el documento que deseas recuperar.', true);
   const context = serverContext();
   el.retrieveUrlInput.value = retrieveUrl;
@@ -993,10 +1473,21 @@ async function retrieveIti68(value) {
   try {
     const payload = await requestJson('/api/mhd/iti68', {
       method: 'POST', body: JSON.stringify(serverRequest({ retrieveUrl, serverUrl: context.serverUrl }))
+=======
+  if (!retrieveUrl) return showToast('Indica el documentId o la URL devuelta por la búsqueda.', true);
+  const context = serverContext();
+  el.retrieveUrlInput.value = retrieveUrl;
+  el.iti68Button.disabled = true; el.iti68Button.textContent = 'Recuperando…';
+  el.queryStatus.className = 'badge neutral'; el.queryStatus.textContent = 'Recuperando';
+  try {
+    const payload = await requestJson('/api/documents/retrieve', {
+      method: 'POST', body: JSON.stringify({ documentIdOrUrl: retrieveUrl })
+>>>>>>> origin/master
     });
     if (!isCurrentServerContext(context)) return;
     const resource = payload.result.bundle;
     el.jsonEditor.value = JSON.stringify(resource, null, 2);
+<<<<<<< HEAD
     state.fileName = `iti68-${resource.id || 'documento'}.json`;
     parseEditor({ silent: true });
     showPage('editor');
@@ -1008,6 +1499,19 @@ async function retrieveIti68(value) {
     el.queryStatus.className = 'badge error'; el.queryStatus.textContent = 'Error';
     showToast(error.message, true);
   } finally { el.iti68Button.disabled = false; el.iti68Button.textContent = 'ITI-68 · Recuperar'; }
+=======
+    state.fileName = `${payload.result.documentId || resource.id || 'documento'}.json`;
+    parseEditor({ silent: true });
+    showPage('editor');
+    showToast('Documento recuperado y cargado en el editor/visor.');
+  } catch (error) {
+    if (!isCurrentServerContext(context)) return;
+    el.queryResult.className = '';
+    el.queryResult.innerHTML = `<div class="notice warning"><strong>No fue posible recuperar el documento.</strong><br>${escapeHtml(error.message)}</div>`;
+    el.queryStatus.className = 'badge error'; el.queryStatus.textContent = 'Error';
+    showToast(error.message, true);
+  } finally { el.iti68Button.disabled = false; el.iti68Button.textContent = 'Recuperar documento'; }
+>>>>>>> origin/master
 }
 
 async function loadLogs() {
@@ -1020,8 +1524,13 @@ async function loadLogs() {
     el.logsList.className = 'logs-list';
     el.logsList.innerHTML = payload.logs.map(log => {
       const action = String(log.action || '');
+<<<<<<< HEAD
       const actionView = /^mhd\./i.test(action)
         ? `<a class="log-profile-link" href="https://profiles.ihe.net/ITI/MHD/index.html" target="_blank" rel="noreferrer"><strong>Perfil MHD de IHE ↗</strong><code>${escapeHtml(action.replace(/^mhd\./i, ''))}</code></a>`
+=======
+      const actionView = /^documents\./i.test(action)
+        ? `<a class="log-profile-link" href="${escapeHtml(state.config?.guideUrl || '#')}" target="_blank" rel="noreferrer"><strong>Intercambio documental</strong><code>${escapeHtml(action.replace(/^documents\./i, ''))}</code></a>`
+>>>>>>> origin/master
         : `<code>${escapeHtml(action)}</code>`;
       return `<article class="log-item ${escapeHtml(log.level)}"><time>${escapeHtml(formatDate(log.timestamp))}</time><span class="log-status">${escapeHtml(log.status || log.level.toUpperCase())}</span>${actionView}<p>${escapeHtml(log.message)}${log.url ? `<br><code>${escapeHtml(log.method || '')} ${escapeHtml(log.url)}</code>` : ''}${log.durationMs ? `<br>${escapeHtml(log.durationMs)} ms` : ''}${log.error?.message ? `<br><strong>${escapeHtml(log.error.message)}</strong>` : ''}</p></article>`;
     }).join('');
@@ -1101,6 +1610,14 @@ async function initialize() {
   document.querySelectorAll('[data-page-target]').forEach(control => control.addEventListener('click', () => showPage(control.dataset.pageTarget)));
   el.menuButton.addEventListener('click', () => document.querySelector('.sidebar')?.classList.toggle('open'));
   el.jsonEditor.addEventListener('input', () => { clearTimeout(state.debounce); state.debounce = setTimeout(() => parseEditor({ silent: true }), 350); });
+<<<<<<< HEAD
+=======
+  el.iti65TransactionEditor.addEventListener('input', () => {
+    clearTimeout(state.iti65Debounce);
+    state.iti65TransactionValidation = null;
+    state.iti65Debounce = setTimeout(() => parseIti65Transaction({ silent: true }), 350);
+  });
+>>>>>>> origin/master
   el.jsonEditor.addEventListener('dragover', event => event.preventDefault());
   el.jsonEditor.addEventListener('drop', event => { event.preventDefault(); readFile(event.dataTransfer.files?.[0]); });
   el.jsonFileInput.addEventListener('change', () => readFile(el.jsonFileInput.files?.[0]));
@@ -1118,9 +1635,25 @@ async function initialize() {
   });
   el.binaryPreviewDialog.addEventListener('close', closePdfPreview);
   el.validateButton.addEventListener('click', () => validateCurrentResource());
+<<<<<<< HEAD
   el.iti65ValidateButton.addEventListener('click', () => validateCurrentResource({ openEditor: true }));
   el.iti65SendButton.addEventListener('click', sendIti65);
   el.iti67Button.addEventListener('click', runSearch);
+=======
+  el.prepareIti65Button.addEventListener('click', prepareIti65Transaction);
+  el.formatIti65Button.addEventListener('click', formatIti65Transaction);
+  el.downloadIti65Button.addEventListener('click', downloadIti65Transaction);
+  el.iti65ValidateButton.addEventListener('click', validateIti65Transaction);
+  el.iti65SendButton.addEventListener('click', sendIti65);
+  el.iti67Button.addEventListener('click', runSearch);
+  el.patientIdentifierTypeSelect.addEventListener('change', updateIdentifierSystem);
+  el.explorerServerSelect.addEventListener('change', updateExplorerType);
+  el.explorerResourceType.addEventListener('change', () => { state.explorerNextUrl = null; el.explorerNextButton.disabled = true; });
+  el.explorerGlobalToggle.addEventListener('change', () => { state.explorerNextUrl = null; el.explorerNextButton.disabled = true; });
+  el.explorerSearchButton.addEventListener('click', () => searchExplorer(false));
+  el.explorerNextButton.addEventListener('click', () => searchExplorer(true));
+  el.explorerResult.addEventListener('click', handleExplorerResult);
+>>>>>>> origin/master
   el.iti68Button.addEventListener('click', () => retrieveIti68());
   el.queryResult.addEventListener('click', event => { const button = event.target.closest('.retrieve-document'); if (button) retrieveIti68(button.dataset.url); });
   el.refreshLogsButton.addEventListener('click', loadLogs);
@@ -1129,8 +1662,11 @@ async function initialize() {
   el.addServerButton.addEventListener('click', addCustomServer);
   el.serverUrlConfigInput.addEventListener('keydown', event => { if (event.key === 'Enter') { event.preventDefault(); addCustomServer(); } });
   el.serverList.addEventListener('click', handleServerListAction);
+<<<<<<< HEAD
   el.serverTokenInput.addEventListener('input', () => { el.tokenInput.value = el.serverTokenInput.value; });
   el.tokenInput.addEventListener('input', () => { el.serverTokenInput.value = el.tokenInput.value; });
+=======
+>>>>>>> origin/master
   document.querySelectorAll('.resource-tab').forEach(tab => tab.addEventListener('click', () => changeManagedResourceType(tab.dataset.resourceType)));
   el.refreshResourcesButton.addEventListener('click', loadManagedResources);
   el.managedResourceForm.addEventListener('submit', createManagedResource);
@@ -1147,8 +1683,13 @@ async function initialize() {
   try {
     const payload = await requestJson('/api/config');
     state.config = payload;
+<<<<<<< HEAD
     loadServers(payload);
     el.sourceIdInput.value = payload.sourceId || '';
+=======
+    initializeIdentifierTypes();
+    loadServers(payload);
+>>>>>>> origin/master
     renderManagedResourceForm();
     showGuidedCaseFields();
     showGuidedPatientMode();

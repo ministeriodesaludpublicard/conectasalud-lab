@@ -3,7 +3,10 @@ const assert = require('node:assert/strict');
 const {
   buildValidateUrl,
   normalizeOperationOutcome,
+<<<<<<< HEAD
   resolveRetrieveUrl,
+=======
+>>>>>>> origin/master
   isPrivateNetworkAddress,
   validateRemoteFhirUrl,
   assertManagedResourceType,
@@ -39,6 +42,7 @@ test('OperationOutcome se resume por severidad y determina si es válido', () =>
   assert.equal(result.issues[0].expression[0], 'Patient.identifier');
 });
 
+<<<<<<< HEAD
 test('ITI-68 normaliza una URL absoluta de Bundle contra el HAPI configurado', () => {
   assert.equal(
     resolveRetrieveUrl('http://hapi.test/fhir', 'http://otro.test/fhir/Bundle/abc-123'),
@@ -50,6 +54,8 @@ test('ITI-68 normaliza una URL absoluta de Bundle contra el HAPI configurado', (
   );
 });
 
+=======
+>>>>>>> origin/master
 test('la carga por URL reconoce direcciones privadas y reservadas', () => {
   assert.equal(isPrivateNetworkAddress('127.0.0.1'), true);
   assert.equal(isPrivateNetworkAddress('192.168.1.20'), true);

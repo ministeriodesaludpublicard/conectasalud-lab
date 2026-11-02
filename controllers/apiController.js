@@ -1,5 +1,10 @@
 const fhir = require('../services/fhirServerService');
 const { buildGuidedDocument } = require('../services/guidedDocumentService');
+<<<<<<< HEAD
+=======
+const documents = require('../services/documentMediatorService');
+const explorer = require('../services/documentExplorerService');
+>>>>>>> origin/master
 const { readLogs, appendLog } = require('../services/logger');
 const { sendJson, readJsonBody } = require('../http/json');
 
@@ -21,23 +26,47 @@ function createApiController(config) {
   };
 
   const routes = new Map([
+<<<<<<< HEAD
+=======
+    ['GET /api/health', async ({ res }) => sendJson(res, 200, {
+      ok: true, service: 'conectasalud-lab', version: '1.9.0'
+    })],
+>>>>>>> origin/master
     ['GET /api/config', async ({ res }) => sendJson(res, 200, {
       ok: true,
       hapiFhirUrl: config.hapiFhirUrl,
       defaultFhirServerUrl: config.defaultFhirServerUrl,
       fhirServers: config.fhirServers,
+<<<<<<< HEAD
       guideUrl: config.guideUrl,
       guideVersion: config.guideVersion,
       sourceId: config.sourceId,
       scope: config.scope
+=======
+      documentExplorer: { allowGlobal: config.documentExplorer.allowGlobal },
+      identifierSystems: config.identifierSystems,
+      guideUrl: config.guideUrl,
+      guideVersion: config.guideVersion,
+      scope: config.scope,
+      documentTypes: require('../services/documentProfiles').DOCUMENT_TYPES
+>>>>>>> origin/master
     })],
     ['POST /api/fhir/test', async ({ req, res }) => {
       const { settings } = await withSettings(req);
       sendJson(res, 200, { ok: true, result: await fhir.testFHIRServer(settings.serverUrl, settings.token) });
     }],
     ['POST /api/fhir/validate', async ({ req, res }) => {
+<<<<<<< HEAD
       const { input, settings } = await withSettings(req);
       sendJson(res, 200, { ok: true, result: await fhir.validateFHIRResource({ ...settings, resource: input.resource }) });
+=======
+      const input = await readBody(req);
+      sendJson(res, 200, { ok: true, result: await fhir.validateFHIRResource({
+        serverUrl: config.validationUrl,
+        token: config.validationBearerToken,
+        resource: input.resource
+      }) });
+>>>>>>> origin/master
     }],
     ['POST /api/fhir/fetch', async ({ req, res }) => {
       const { input, settings } = await withSettings(req);
@@ -59,6 +88,7 @@ function createApiController(config) {
       const { input, settings } = await withSettings(req);
       sendJson(res, 200, { ok: true, bundle: await buildGuidedDocument({ ...settings, input: input.input }) });
     }],
+<<<<<<< HEAD
     ['POST /api/mhd/iti65', async ({ req, res }) => {
       const { input, settings } = await withSettings(req);
       sendJson(res, 200, { ok: true, result: await fhir.provideDocumentIti65({
@@ -72,6 +102,53 @@ function createApiController(config) {
     ['POST /api/mhd/iti68', async ({ req, res }) => {
       const { input, settings } = await withSettings(req);
       sendJson(res, 200, { ok: true, result: await fhir.retrieveDocument({ ...settings, retrieveUrl: input.retrieveUrl }) });
+=======
+    ['POST /api/documents/transaction/prepare', async ({ req, res }) => {
+      const input = await readBody(req);
+      sendJson(res, 200, { ok: true, result: documents.preparePublication(input.resource, {
+        sourceId: input.sourceId
+      }) });
+    }],
+    ['POST /api/documents/transaction/publish', async ({ req, res }) => {
+      const input = await readBody(req);
+      sendJson(res, 200, { ok: true, result: await documents.publishPreparedTransaction({
+        config: config.documentMediator, transaction: input.transaction
+      }) });
+    }],
+    ['POST /api/documents/prepare', async ({ req, res }) => {
+      const input = await readBody(req);
+      sendJson(res, 200, { ok: true, result: documents.prepareDocument(input.document) });
+    }],
+    ['POST /api/documents/publish', async ({ req, res }) => {
+      const input = await readBody(req);
+      sendJson(res, 200, { ok: true, result: await documents.publishDocument({
+        config: config.documentMediator, document: input.document
+      }) });
+    }],
+    ['POST /api/documents/search', async ({ req, res }) => {
+      const input = await readBody(req);
+      sendJson(res, 200, { ok: true, result: await documents.searchDocuments({
+        config: config.documentMediator,
+        patientSystem: input.patientSystem,
+        patientValue: input.patientValue,
+        type: input.type,
+        status: input.status || 'current'
+      }) });
+    }],
+    ['POST /api/documents/retrieve', async ({ req, res }) => {
+      const input = await readBody(req);
+      sendJson(res, 200, { ok: true, result: await documents.retrieveDocument({
+        config: config.documentMediator, documentIdOrUrl: input.documentIdOrUrl
+      }) });
+    }],
+    ['POST /api/documents/explorer/search', async ({ req, res }) => {
+      const input = await readBody(req);
+      sendJson(res, 200, { ok: true, result: await explorer.searchInventory({ config, input }) });
+    }],
+    ['POST /api/documents/explorer/read', async ({ req, res }) => {
+      const input = await readBody(req);
+      sendJson(res, 200, { ok: true, result: await explorer.readInventoryResource({ config, input }) });
+>>>>>>> origin/master
     }],
     ['GET /api/logs', async ({ requestUrl, res }) => {
       const limit = Math.min(Math.max(Number(requestUrl.searchParams.get('limit') || 200), 1), 500);
@@ -95,7 +172,11 @@ function createApiController(config) {
         method: req.method, url: req.url, status: statusCode,
         context: { pathname: requestUrl.pathname }, error
       });
+<<<<<<< HEAD
       sendJson(res, statusCode, { ok: false, error: error.message, details: error?.response?.data || null });
+=======
+      sendJson(res, statusCode, { ok: false, error: error.message, details: error?.details || error?.response?.data || null });
+>>>>>>> origin/master
     }
   };
 }

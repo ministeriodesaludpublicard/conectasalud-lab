@@ -10,7 +10,11 @@ test('usa un servidor FHIR local portable cuando el entorno no define otro', () 
   assert.equal(config.hapiFhirUrl, DEFAULT_HAPI_FHIR_URL);
   assert.deepEqual(config.fhirServers, [{
     id: 'configured-default', name: 'Servidor FHIR predeterminado',
+<<<<<<< HEAD
     url: DEFAULT_HAPI_FHIR_URL, locked: true
+=======
+    url: DEFAULT_HAPI_FHIR_URL, role: 'general', locked: true
+>>>>>>> origin/master
   }]);
 });
 
